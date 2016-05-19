@@ -11,11 +11,18 @@ var path = require("path");
 var browserify_client = function(debug){
   var b = browserify({
     catche: {},
-    packageCache: {};
+    packageCache: {},
     fullPaths: true,
-    entries: ["./src/client/main.js"],
-    paths: ["./node_modules", "./src/client", "./src"];
-    transform: ["reactify"],
+    entries: ["./src/client/main.coffee"],
+    paths: ["./node_modules", "./src/client", "./src"],
+    transform: [
+      "reactify",
+      ["coffee-reactify", {"coffeeout": true}],
+      "coffeeify",
+      "cssify",
+      ["browserify-css", {"global": true}],
+      ["reactify", {"es6": true, "everything": true}]
+    ],
     debug: debug})
   .transform(browserify_css, {
     processRelativeUrl: function(url){
@@ -27,6 +34,7 @@ var browserify_client = function(debug){
   if (!debug){
     b.transform({global: true}, "uglifyify");
   }
+  return b;
 }
 
 var compile_client = function(b, debug){
@@ -44,19 +52,21 @@ gulp.task("clean", function(cb){
   cb();
 });
 
-gulp.task("build-client-dev", function(cb)){
+gulp.task("build-client-dev", function(cb){
   var b = browserify_client(true);
+  compile_client(b, true);
   gulp.src("./node_modules/boostrap/fonts/*")
     .pipe(gulp.dest("dist/client/assets"));
     cb();
-}
+});
 
-gulp.task("build-client", function(cb)){
+gulp.task("build-client", function(cb){
   var b = browserify_client(false);
+  compile_client(b, false);
   gulp.src("./node_modules/boostrap/fonts/*")
     .pipe(gulp.dest("dist/client/assets"));
     cb();
-}
+});
 
 gulp.task("watchify-client", ["build-client-dev"], function(cb){
   var b = browserify_client(true);

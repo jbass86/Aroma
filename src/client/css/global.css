@@ -1,0 +1,110 @@
+/*Author: Josh Bass*/
+/*Description: Some generic style classes which can be used by any component anywhere*/
+
+.clear-both{
+	clear: both;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+.display-none{
+	display: none;
+}
+
+.fade-out{
+	opacity: 0;
+	-webkit-transition: opacity .5s;
+	-moz-transition: opacity .5s;
+	transition: opacity .5s;
+}
+
+.fade-in{
+	opacity: 1;
+	-webkit-transition: opacity .5s;
+	-moz-transition: opacity .5s;
+	transition: opacity .5s;
+}
+
+.collapsible {
+  transition: max-height .8s, max-width .8s;
+	-webkit-transition: max-height .8s, max-width .8s;
+  -moz-transition: max-height .8s, max-width .8s;
+  overflow: hidden;
+}
+
+.collapse-toggle:after {
+	content: "\e114";
+	color: white;
+}
+
+.collapsed .collapse-toggle:after {
+	content: "\e080"
+}
+
+.border-color-trans {
+	-webkit-transition : border 300ms ease-out;
+  -moz-transition : border 300ms ease-out;
+  -o-transition : border 300ms ease-out;
+  transition : border 300ms ease-out;
+}
+
+.overflow-visible{
+	overflow: visible;
+}
+
+.no-height{
+	max-height: 0px;
+}
+
+.full-height-small{
+	max-height: 500px;
+}
+
+.full-height-medium{
+	max-height: 1500px;
+}
+
+.full-height-large{
+	max-height: 3000px;
+}
+
+.full-height{
+	max-height: 8000px;
+}
+
+.no-width{
+	max-width: 0px;
+}
+
+.full-width-small{
+	max-width: 500px;
+}
+
+.full-width{
+	max-width: 1920px;
+}
+
+.pressed-border{
+	border-color: #000000 #555555 #555555 #000000;
+    border-radius: 5px 5px 5px 5px;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.box-shadow{
+    box-shadow: 0px 9px 16px rgba(0, 0, 0, 0.99);
+    -moz-box-shadow: 0px 9px 16px rgba(0, 0, 0, 0.99);
+    -webkit-box-shadow: 0px 9px 16px rgba(0, 0, 0, 0.99);
+}
+
+.unselectable {
+	cursor:default;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

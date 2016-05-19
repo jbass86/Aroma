@@ -1,0 +1,90 @@
+/*Author: Josh Bass*/
+/*Description: This sheet contains some base styles mostly used by the components laid out in main.js*/
+
+@import "../../../node_modules/bootstrap/dist/css/bootstrap.css";
+
+@import "./global.css";
+
+body {
+
+  background: rgb(109,113,121); /* Old browsers */
+  background: -moz-linear-gradient(top,  rgba(109,113,121,1) 0%, rgba(59,59,59,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(109,113,121,1)), color-stop(100%,rgba(59,59,59,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba(109,113,121,1) 0%,rgba(59,59,59,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba(109,113,121,1) 0%,rgba(59,59,59,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba(109,113,121,1) 0%,rgba(59,59,59,1) 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba(109,113,121,1) 0%,rgba(59,59,59,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d7179', endColorstr='#3b3b3b',GradientType=0 ); /* IE6-9 */
+
+  overflow: hidden;
+}
+
+.header-area{
+  height: 50px;
+  width: 100vw;
+}
+
+.navigation-area{
+  width: 17%;
+  height: 97%;
+  height: calc(100vh - 50px);
+  height: -moz-calc(100vh - 50px);
+
+  border-radius: 10px;
+
+  background: rgb(69,72,77); /* Old browsers */
+  background: -moz-linear-gradient(top,  rgba(69,72,77,1) 0%, rgba(0,0,0,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69,72,77,1)), color-stop(100%,rgba(0,0,0,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+
+  -webkit-transition: width .5s;
+	-moz-transition: width .5s;
+	transition: width .5s;
+
+  overflow: hidden;
+
+  float: left;
+}
+
+.nav-no-width{
+  width: 0%;
+}
+
+.main-area{
+
+  height: 97%;
+  height: calc(100vh - 50px);
+  height: -moz-calc(100vh - 50px);
+
+  width: 83%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  float: left;
+
+  -webkit-transition: width .5s;
+	-moz-transition: width .5s;
+	transition: width .5s;
+}
+
+.main-no-nav-bar{
+  width: 99.8%;
+}
+
+.main-holder{
+  -webkit-transition: width .5s;
+  -moz-transition: width .5s;
+  transition: width .5s;
+  width: 83vw;
+}
+
+.main-holder-no-nav-bar{
+  width: 100vw;
+}
+
+.mast-panel{
+  padding-bottom: 60px;
+}
