@@ -5,7 +5,7 @@
 
 @import "./global.css";
 
-body {
+#react-body {
 
   background: rgb(109,113,121); /* Old browsers */
   background: -moz-linear-gradient(top,  rgba(109,113,121,1) 0%, rgba(59,59,59,1) 100%); /* FF3.6+ */
@@ -56,22 +56,14 @@ body {
 
 .main-area{
 
-  height: 97%;
   height: calc(100vh - 50px);
   height: -moz-calc(100vh - 50px);
 
-  width: 83%;
+  width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
-  float: left;
 
-  -webkit-transition: width .5s;
-	-moz-transition: width .5s;
-	transition: width .5s;
-}
-
-.main-no-nav-bar{
-  width: 99.8%;
+  padding: 25px;
 }
 
 .main-holder{

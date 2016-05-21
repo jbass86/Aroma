@@ -55,15 +55,16 @@ gulp.task("clean", function(cb){
 gulp.task("build-client-dev", function(cb){
   var b = browserify_client(true);
   compile_client(b, true);
-  gulp.src("./node_modules/boostrap/fonts/*")
+  gulp.src("./node_modules/bootstrap/fonts/*")
     .pipe(gulp.dest("dist/client/assets"));
-    cb();
+  console.log("compile boostrap fonts")
+  cb();
 });
 
 gulp.task("build-client", function(cb){
   var b = browserify_client(false);
   compile_client(b, false);
-  gulp.src("./node_modules/boostrap/fonts/*")
+  gulp.src("./node_modules/bootstrap/fonts/*")
     .pipe(gulp.dest("dist/client/assets"));
     cb();
 });
