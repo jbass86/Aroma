@@ -13,7 +13,7 @@ var body_parser = require("body-parser");
 var MongoCoordinator = require("./database/MongoCoordinator");
 var Backbone = require("backbone");
 
-var AuthenticateRoute = require("./routes/authenticate/AuthenticateRoute");
+var LoginRoute = require("./routes/login/LoginRoute");
 var UserRoute = require("./routes/user/UserRoute");
 
 var app = express();
@@ -32,10 +32,10 @@ var auth_model = new Backbone.Model();
 auth_model.set("token_pw", token_pw);
 var mongo_coord = new MongoCoordinator({});
 
-var auth_route = new AuthenticateRoute(mongo_coord, auth_model);
+var login_route = new LoginRoute(mongo_coord, auth_model);
 var user_route = new UserRoute(mongo_coord);
 app.post("/aroma/create_user", user_route.httpPostCreateUser.bind(user_route));
-app.post("/aroma/authenticate", auth_route.httpPostAuthUser.bind(auth_route));
+app.post("/aroma/login", login_route.httpPostAuthUser.bind(login_route));
 
 app.listen(port, '0.0.0.0');
 console.log("Server Listening on port: " + port);

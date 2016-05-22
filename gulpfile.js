@@ -57,7 +57,6 @@ gulp.task("build-client-dev", function(cb){
   compile_client(b, true);
   gulp.src("./node_modules/bootstrap/fonts/*")
     .pipe(gulp.dest("dist/client/assets"));
-  console.log("compile boostrap fonts")
   cb();
 });
 

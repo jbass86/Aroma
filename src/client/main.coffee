@@ -8,7 +8,11 @@ React = require("react");
 ReactDOM = require("react-dom");
 css = require ("css/main.css");
 
+
 HeaderBar = require("components/header_bar/HeaderBarView.coffee");
+LoginView = require("components/login/LoginView.coffee");
+
+
 Backbone = require("backbone");
 
 $(() ->
@@ -18,7 +22,7 @@ $(() ->
   comp = React.createClass
 
     getInitialState: () ->
-      return {};
+      return {authenticated: false, remove_login: false};
 
 
     componentDidMount: () ->
@@ -27,21 +31,51 @@ $(() ->
 
     render: () ->
       <div>
-        <div className="header-area">
-          <HeaderBar nav_model={a_model}/>
+        <div className={@getLoginClasses()}>
+          <LoginView login_success={@handleLoginSuccess}/>
         </div>
-        <div className="nav-area"></div>
-        <div className="main-area">Hello World</div>
+        {@renderMain()}
       </div>
+
+    renderMain: () ->
+      if (@state.authenticated)
+        <div>
+          <div className={"header-area" + @getMainClasses()}>
+            <HeaderBar nav_model={a_model}/>
+          </div>
+          <div className={"nav-area" + @getMainClasses()}></div>
+          <div className={"main-area" + @getMainClasses()}>Hello World</div>
+        </div>
+      else
+        <div></div>
+
+    getLoginClasses: () ->
+      console.log("get login classes!");
+      classes = "";
+      if (@state.authenticated)
+        classes += " fade-out";
+      if (@state.remove_login)
+        classes += " display-none";
+      classes;
+
+    getMainClasses: () ->
+      classes = "";
+      if (@state.authenticated)
+        classes += " fade-in";
+      else
+        classes += " fade-out"
+      classes;
+
+    handleLoginSuccess: (token) ->
+      window.token = token;
+      @setState({authenticated: true});
+      window.setTimeout(()=>
+        @setState({remove_login: true});
+      , 1000);
+
   ReactDOM.render(React.createElement(comp, null), $("#react-body").get(0));
 
-  $.post("aroma/create_user", {username: "Bass", password: "Password"}, (response) =>
-    console.log(response);
-  );
-
-  window.setTimeout(() =>
-    $.post("aroma/authenticate", {username: "Bass", password: "Password"}, (response) =>
-      console.log(response);
-    );
-  , 2000);
+  # $.post("aroma/create_user", {username: "Josh", password: "Bass"}, (response) =>
+  #   console.log(response);
+  # );
 );

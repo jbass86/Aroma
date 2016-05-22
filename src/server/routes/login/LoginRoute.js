@@ -3,7 +3,7 @@
 var jsonwebtoken = require("jsonwebtoken");
 var bcrypt = require("bcrypt-nodejs");
 
-module.exports = class AuthenticateRoute {
+module.exports = class LoginRoute {
 
   constructor(db_coord, auth_model) {
     this.db_coord = db_coord;
@@ -27,17 +27,17 @@ module.exports = class AuthenticateRoute {
           if (item){
             if (bcrypt.compareSync(req.body.password, item.password)){
               var token = jsonwebtoken.sign({username: item.username, group: "Default"}, _this.auth_model.get("token_pw"));
-              res.send({sucess: true, message: "Authentication Sucess!!", token});
+              res.send({success: true, message: "Authentication Sucess!!", token});
             }else{
-              res.send({sucess: false, message: "Username/Password Incorrect", token});
+              res.send({success: false, message: "Username/Password Incorrect", token});
             }
           }else{
-            res.send({sucess: false, message: "Username/Password Incorrect"});
+            res.send({success: false, message: "Username/Password Incorrect"});
           }
         }
       });
     }else{
-      res.send({sucess: success, message: "Error Creating User"});
+      res.send({success: success, message: "Error Creating User"});
     }
   }
 }
