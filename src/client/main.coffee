@@ -47,7 +47,7 @@ $(() ->
           <div className={"main-area" + @getMainClasses()}>Hello World</div>
         </div>
       else
-        <div></div>
+        <div style={{"width": "100vw", "height": "100vh"}}></div>
 
     getLoginClasses: () ->
       console.log("get login classes!");

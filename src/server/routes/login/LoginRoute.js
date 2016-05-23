@@ -10,6 +10,7 @@ module.exports = class LoginRoute {
     this.auth_model = auth_model;
   }
 
+
   httpPostAuthUser(req, res){
 
     var _this = this;
@@ -37,7 +38,7 @@ module.exports = class LoginRoute {
         }
       });
     }else{
-      res.send({success: success, message: "Error Creating User"});
+      res.send({success: false, message: "Error Creating User"});
     }
   }
 }

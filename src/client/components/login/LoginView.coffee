@@ -2,13 +2,14 @@
 
 React = require("react");
 
+CreateUserView = require("./CreateUserView.coffee");
 
 css = require("./res/css/login.css")
 
 module.exports = React.createClass
 
   getInitialState: ->
-    {username: "", password: "", login_alert: ""};
+    {username: "", password: "", login_alert: "", show_create_user: false};
 
   componentDidMount: ->
 
@@ -28,16 +29,19 @@ module.exports = React.createClass
 
           <div className="login-input">
             <div><b>Password</b></div>
-            <input type="text" onChange={@handlePassword}/>
+            <input type="password" onChange={@handlePassword}/>
           </div>
 
           <div className="login-button">
             <button className="btn btn-success" onClick={@handleSignIn}>Sign in</button>
           </div>
           <div className="login-button">
-            <button className="btn btn-primary">Create an Account</button>
+            <button className="btn btn-primary"  onClick={@handleCreateUser}>Create an Account</button>
           </div>
           {@getLoginAlert()}
+          <div className={@createUserClasses()}>
+            <CreateUserView close_event={@closeCreateUser}/>
+          </div>
         </div>
       </div>
     </div>
@@ -52,6 +56,14 @@ module.exports = React.createClass
     else
       <div></div>
 
+  createUserClasses: () ->
+    classes = "collapsible"
+    if (@state.show_create_user)
+      classes += " full-height-small";
+    else
+      classes += " no-height";
+    classes
+
   dismissAlert: (event) ->
     @setState(login_alert: "");
 
@@ -62,14 +74,16 @@ module.exports = React.createClass
     @setState(password: event.target.value);
 
   handleSignIn: (event) ->
-    console.log("Try to Sign in with these credentials...");
-    console.log(@state.username + " " + @state.password);
     $.post("aroma/login", {username: @state.username, password: @state.password}, (response) =>
-      console.log(response);
       if (!response.success)
-        console.log("failed login setting state " + response.message);
         @setState(login_alert: response.message);
       else
         @props.login_success(response.token);
 
     );
+
+  handleCreateUser: (event) ->
+    @setState({show_create_user: true});
+
+  closeCreateUser: () ->
+    @setState({show_create_user: false});

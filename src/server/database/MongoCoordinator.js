@@ -10,13 +10,12 @@ module.exports = class MongoCoordinator {
     var _this = this;
 
     var MongoClient = mongodb.MongoClient;
-    MongoClient.connect("mongodb://localhost:27017", (err, db)=>{
+    MongoClient.connect("mongodb://localhost:27017/aroma", (err, db) => {
 
       if (err){
+        //gonna need some retry logic here...
         console.log("something bad happened!!!");
       }
-
-      console.log("we connected!!!");
       _this.db = db;
     })
   }

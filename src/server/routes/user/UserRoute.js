@@ -24,7 +24,11 @@ module.exports = class UserRoute {
             res.send({sucess: false, message: "User Already Exists..."});
           }else{
 
-            var user = {_id: req.body.username, username: req.body.username, password: bcrypt.hashSync(req.body.password)};
+            var user = {_id: req.body.username,
+              username: req.body.username,
+              password: bcrypt.hashSync(req.body.password),
+              email: req.body.email,
+              group: (req.body.group) ? req.body.group : "default"};
             console.log("Creating a user");
             console.log(user);
             collection.insert(user, {w:1}, (err, result) => {
