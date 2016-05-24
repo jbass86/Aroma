@@ -10,14 +10,17 @@ css = require ("css/main.css");
 
 
 HeaderBar = require("components/header_bar/HeaderBarView.coffee");
+NavigationBar = require("components/navigation_bar/NavigationBarview.coffee");
 LoginView = require("components/login/LoginView.coffee");
 
+Inventory = require("components/inventory/InventoryView.coffee");
+Customers = require("components/customers/CustomerView.coffee");
 
 Backbone = require("backbone");
 
 $(() ->
 
-  a_model = new Backbone.Model();
+  nav_model = new Backbone.Model();
 
   comp = React.createClass
 
@@ -40,11 +43,16 @@ $(() ->
     renderMain: () ->
       if (@state.authenticated)
         <div>
+          <NavigationBar nav_model={nav_model}/>
+
           <div className={"header-area" + @getMainClasses()}>
-            <HeaderBar nav_model={a_model}/>
+            <HeaderBar nav_model={nav_model}/>
           </div>
-          <div className={"nav-area" + @getMainClasses()}></div>
-          <div className={"main-area" + @getMainClasses()}>Hello World</div>
+
+          <div className={"main-area" + @getMainClasses()}>
+            <Inventory />
+            <Customers />
+          </div>
         </div>
       else
         <div style={{"width": "100vw", "height": "100vh"}}></div>

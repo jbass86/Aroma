@@ -1,0 +1,50 @@
+/*Author: Josh Bass*/
+/*Description: Style information for the mast diagnostic navigation view*/
+
+.nav-bar-view{
+  position: absolute;
+
+  background: #45484d; /* Old browsers */
+  background: -moz-linear-gradient(top,  #45484d 0%, #000000 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #45484d 0%,#000000 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #45484d 0%,#000000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+
+
+  top: 50px;
+  left: 0px;
+  z-index: 3;
+  width: 20%;
+  height: calc(100% - 50px);
+
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+.nav-header{
+  color: white;
+  text-align: center;
+  padding-bottom: 40px;
+
+  min-width: 220px;
+}
+
+
+.nav-selection{
+  display: block;
+
+  width: 75%;
+  min-width: 220px;
+
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  font-size: 1.1em;
+
+  padding: 15px;
+}
+
+.nav-selection:hover{
+  border: 2px solid orange;
+}

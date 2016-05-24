@@ -87,7 +87,6 @@ module.exports = React.createClass
       @setState(update);
     );
 
-
   handleCreateUser: (event) ->
     console.log("gonna do some stuff here to make a user");
     form_valid = @validateInfo();
@@ -107,7 +106,6 @@ module.exports = React.createClass
           window.setTimeout(() =>
             @handleCloseEvent();
           , 2000)
-
       );
     else
       @setState({user_alert: "Form not valid"});
