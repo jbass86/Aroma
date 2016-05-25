@@ -79,7 +79,6 @@ module.exports = React.createClass
         @setState(login_alert: response.message);
       else
         @props.login_success(response.token);
-
     );
 
   handleCreateUser: (event) ->

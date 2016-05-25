@@ -8,6 +8,9 @@
 
 body {
 
+  height: 100vh;
+  width: 100vw;
+
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4c198e+0,3f0e84+50,180b23+100 */
   background: #4c198e; /* Old browsers */
   background: -moz-linear-gradient(top,  #4c198e 0%, #3f0e84 50%, #180b23 100%); /* FF3.6-15 */

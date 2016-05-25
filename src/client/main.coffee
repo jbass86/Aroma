@@ -13,8 +13,12 @@ HeaderBar = require("components/header_bar/HeaderBarView.coffee");
 NavigationBar = require("components/navigation_bar/NavigationBarview.coffee");
 LoginView = require("components/login/LoginView.coffee");
 
+NavView = require("components/navigation_view/NavigationView.coffee");
 Inventory = require("components/inventory/InventoryView.coffee");
 Customers = require("components/customers/CustomerView.coffee");
+Orders = require("components/orders/OrderView.coffee");
+Analytics = require("components/analytics/AnalyticsView.coffee");
+
 
 Backbone = require("backbone");
 
@@ -25,12 +29,10 @@ $(() ->
   comp = React.createClass
 
     getInitialState: () ->
-      return {authenticated: false, remove_login: false};
-
+      {authenticated: nav_model.get("authenticated"), remove_login: false};
 
     componentDidMount: () ->
       console.log("mounted main comp");
-
 
     render: () ->
       <div>
@@ -50,8 +52,19 @@ $(() ->
           </div>
 
           <div className={"main-area" + @getMainClasses()}>
-            <Inventory />
-            <Customers />
+
+            <NavView nav_model={nav_model} name="inventory">
+              <Inventory />
+            </NavView>
+            <NavView nav_model={nav_model} name="customers">
+              <Customers nav_model={nav_model} />
+            </NavView>
+            <NavView nav_model={nav_model} name="orders">
+              <Orders nav_model={nav_model} />
+            </NavView>
+            <NavView nav_model={nav_model} name="analytics">
+              <Analytics nav_model={nav_model} />
+            </NavView>
           </div>
         </div>
       else
@@ -75,15 +88,18 @@ $(() ->
       classes;
 
     handleLoginSuccess: (token) ->
-      window.token = token;
+      window.sessionStorage.token = token;
       @setState({authenticated: true});
       window.setTimeout(()=>
         @setState({remove_login: true});
       , 1000);
 
-  ReactDOM.render(React.createElement(comp, null), $("#react-body").get(0));
+  if (window.sessionStorage.token)
+    $.post("aroma/secure/authenticate_token", {token: window.sessionStorage.token}, (response) =>
+      nav_model.set("authenticated", response.success);
+      ReactDOM.render(React.createElement(comp, null), $("#react-body").get(0));
+    );
+  else
+    ReactDOM.render(React.createElement(comp, null), $("#react-body").get(0));
 
-  # $.post("aroma/create_user", {username: "Josh", password: "Bass"}, (response) =>
-  #   console.log(response);
-  # );
 );

@@ -10,16 +10,17 @@
   background: linear-gradient(to bottom,  #45484d 0%,#000000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
 
-
   top: 50px;
+
   left: 0px;
   z-index: 3;
-  width: 20%;
+
   height: calc(100% - 50px);
 
   border: 1px solid black;
   border-radius: 3px;
 }
+
 
 .nav-header{
   color: white;

@@ -3,7 +3,7 @@
 React = require("react");
 mathjs = require("mathjs");
 
-css = require("./res/css/inventory.css")
+css = require("./res/css/orders.css")
 
 module.exports = React.createClass
 
@@ -15,8 +15,8 @@ module.exports = React.createClass
 
   render: ->
 
-    <div className="common-view inventory-view">
+    <div className="common-view">
         <div style={{"textAlign": "center", "color": "white"}}>
-          <span>Inventory Coming Soon!!!</span>
+          <span>Orders Coming Soon!!!</span>
         </div>
     </div>

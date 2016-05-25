@@ -81,18 +81,18 @@ gulp.task("watchify-client", ["build-client-dev"], function(cb){
 gulp.task("build-server", function(cb){
   gulp.src("./src/server/**")
     .pipe(gulp.dest("dist"));
+  cb();
 });
 
-gulp.task("watch-server", function(cb){
-  gulp.start("build-server");
-  gulp.watch("./src/server/**", ['build-server']);
+gulp.task("watch-server", ["build-server"], function(cb){
+  gulp.watch("./src/server/**/*.js", ['build-server']);
+  cb();
 });
 
-gulp.task("watch-all", function(cb){
+gulp.task("watch-all", function(){
 
   gulp.start("watch-server");
   gulp.start("watchify-client");
-  cb();
 });
 
 gulp.task("build-dev", [], function(cb){

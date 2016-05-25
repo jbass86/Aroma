@@ -17,16 +17,19 @@ module.exports = React.createClass
 
   render: ->
 
-    <div className={"nav-bar-view collapsible" + if @state.nav_visible then " full-width-med" else " no-width"}>
-      <h2 className="nav-header">
-        <span>Aroma</span>
-      </h2>
+    <div class="row">
+    
+      <div className={"nav-bar-view collapsible-real" + if @state.nav_visible then " col-xs-6 col-md-4" else " no-width"}>
+        <h2 className="nav-header">
+          <span>Aroma</span>
+        </h2>
 
-      <div className="nav-selections unselectable">
-        <div className={@getNavSelectionClasses("inventory")} onClick={@selectNavView.bind(@, "inventory")}>Inventory</div>
-        <div className={@getNavSelectionClasses("customers")} onClick={@selectNavView.bind(@, "customers")}>Customers</div>
-        <div className={@getNavSelectionClasses("orders")} onClick={@selectNavView.bind(@, "orders")}>Orders</div>
-        <div className={@getNavSelectionClasses("analytics")} onClick={@selectNavView.bind(@, "analytics")}>Analytics</div>
+        <div className="nav-selections unselectable">
+          <div className={@getNavSelectionClasses("inventory")} onClick={@selectNavView.bind(@, "inventory")}>Inventory</div>
+          <div className={@getNavSelectionClasses("customers")} onClick={@selectNavView.bind(@, "customers")}>Customers</div>
+          <div className={@getNavSelectionClasses("orders")} onClick={@selectNavView.bind(@, "orders")}>Orders</div>
+          <div className={@getNavSelectionClasses("analytics")} onClick={@selectNavView.bind(@, "analytics")}>Analytics</div>
+        </div>
       </div>
     </div>
 

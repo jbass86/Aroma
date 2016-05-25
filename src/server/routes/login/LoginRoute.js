@@ -41,4 +41,8 @@ module.exports = class LoginRoute {
       res.send({success: false, message: "Error Creating User"});
     }
   }
+
+  httpValidateSession(req, res){
+    res.send({success: true, message: "Token Validated"});
+  }
 }

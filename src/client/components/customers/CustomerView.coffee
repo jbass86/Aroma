@@ -16,5 +16,7 @@ module.exports = React.createClass
   render: ->
 
     <div className="common-view customer-view">
-      <span style={{"color": "white"}}>Customers Coming Soon!!!</span>
+      <div style={{"textAlign": "center", "color": "white"}}>
+        <span>Customers Coming Soon!!!</span>
+      </div>
     </div>
