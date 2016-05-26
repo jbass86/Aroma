@@ -44,11 +44,14 @@
     "jsonwebtoken": "^7.0.0",
     "mathjs": "^3.2.1",
     "minimist": "^1.2.0",
+    "moment": "^2.13.0",
     "mongodb": "^2.1.19",
     "mongoose": "^4.4.17",
     "morgan": "^1.7.0",
     "react": "^15.0.2",
+    "react-datepicker": "^0.27.0",
     "react-dom": "^15.0.2",
+    "react-widgets": "^3.3.1",
     "socket.io": "^1.4.6",
     "socket.io-client": "^1.4.6"
   }

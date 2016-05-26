@@ -25,11 +25,13 @@ Backbone = require("backbone");
 $(() ->
 
   nav_model = new Backbone.Model();
+  nav_model.set("authenticated", false);
+  nav_model.set("remove_login", false);
 
   comp = React.createClass
 
     getInitialState: () ->
-      {authenticated: nav_model.get("authenticated"), remove_login: false};
+      {authenticated: nav_model.get("authenticated"), remove_login: nav_model.get("remove_login")};
 
     componentDidMount: () ->
       console.log("mounted main comp");
@@ -97,6 +99,7 @@ $(() ->
   if (window.sessionStorage.token)
     $.post("aroma/secure/authenticate_token", {token: window.sessionStorage.token}, (response) =>
       nav_model.set("authenticated", response.success);
+      nav_model.set("remove_login", response.success);
       ReactDOM.render(React.createElement(comp, null), $("#react-body").get(0));
     );
   else

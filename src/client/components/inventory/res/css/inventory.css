@@ -1,4 +1,9 @@
 
 .inventory-view{
-  
+  color: white;
+}
+
+.inventory-view .inventory-mod-button{
+  margin: 5px;
+  float: right;
 }

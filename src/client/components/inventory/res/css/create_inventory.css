@@ -1,0 +1,46 @@
+
+.add-inventory {
+
+  border: 1px solid white;
+  border-radius: 2px;
+
+  width: 50%;
+  margin: auto;
+}
+
+.add-inventory .inventory-input-field{
+  margin: 10px;
+}
+
+.add-inventory .inventory-input-field .inventory-input-label{
+
+  color: white;
+
+  float: left;
+  width: 25%;
+}
+
+.add-inventory .inventory-input-field .inventory-input{
+  color: black;
+  float: left;
+  width: 65%;
+}
+
+.add-inventory .inventory-input-field .inventory-file-input{
+  color: white;
+  float: left;
+}
+
+.add-inventory .inventory-input-field .inventory-date-field{
+  color: black;
+  float: left;
+  width: 100%;
+}
+
+.add-inventory .inventory-create-buttons{
+  width: 50%;
+  margin: auto;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: center;
+}
