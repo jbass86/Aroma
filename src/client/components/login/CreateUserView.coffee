@@ -73,7 +73,7 @@ module.exports = React.createClass
       <div></div>
 
   dismissAlert: (event) ->
-    @setState(user_alert: "");
+    @setState({user_alert: ""});
 
   handleFieldUpdate: (field_name, event) ->
     update = {};
@@ -105,7 +105,7 @@ module.exports = React.createClass
           @setState({user_alert: response.message, user_success: response.success});
           window.setTimeout(() =>
             @handleCloseEvent();
-          , 2000)
+          , 2000);
       );
     else
       @setState({user_alert: "Form not valid"});

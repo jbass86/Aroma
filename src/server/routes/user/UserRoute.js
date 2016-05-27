@@ -33,7 +33,7 @@ module.exports = class UserRoute {
             console.log(user);
             collection.insert(user, {w:1}, (err, result) => {
               if (err){
-                res.send({sucess: success, message: "Error Creating User"});
+                res.send({sucess: false, message: "Error Creating User"});
               }else{
                 console.log("it was a success!!!");
                 res.send({success: true, message: "User Created Sucessfully"});

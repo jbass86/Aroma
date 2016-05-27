@@ -36,6 +36,16 @@ $(() ->
     componentDidMount: () ->
       console.log("mounted main comp");
 
+      # window.setTimeout(()=>
+      #   console.log("get an image");
+      #   $.get("aroma/secure/get_inventory_image", {token: window.sessionStorage.token}, (response) =>
+      #
+      #     console.log("got the response back!!!");
+      #     console.log(response);
+      #     @setState({"img_url": "data:" + response.mimetype + ";base64," + response.buffer});
+      #   );
+      # , 5000);
+
     render: () ->
       <div>
         <div className={@getLoginClasses()}>
@@ -69,6 +79,7 @@ $(() ->
             </NavView>
           </div>
         </div>
+
       else
         <div style={{"width": "100vw", "height": "100vh"}}></div>
 

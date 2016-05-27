@@ -11,8 +11,12 @@ module.exports = class AuthenticateRouter {
     var _this = this;
 
     _this.router = express.Router();
-    
+
     _this.router.use((req, res, next) => {
+
+      console.log(req.body);
+      console.log(req.file);
+      console.log("WOOOOOOOOOOOOOOOOOOOO");
 
       // check header or url parameters or post parameters for token
       var token = req.body.token || req.query.token || req.headers['x-access-token'];
@@ -27,6 +31,8 @@ module.exports = class AuthenticateRouter {
           } else {
             // if everything is good, save to request for use in other routes
             req.decoded = decoded;
+            console.log("my decoded token");
+            console.log(decoded);
             next();
           }
         });

@@ -25,7 +25,7 @@ module.exports = React.createClass
         <button type="button" className="inventory-mod-button btn btn-info" onClick={@showCreateInventory}>Add Item</button>
         <div className="clear-both"></div>
         <div className={@getCreateInventoryClasses()}>
-          <CreateInventory />
+          <CreateInventory close_event={@closeEvent} />
         </div>
       </div>
 
@@ -49,3 +49,6 @@ module.exports = React.createClass
   showCreateInventory: (ev) ->
     console.log("show create inventory");
     @setState({show_create_inventory: true});
+
+  closeEvent: ->
+    @setState({show_create_inventory: false});

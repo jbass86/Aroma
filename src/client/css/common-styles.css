@@ -22,3 +22,9 @@
   padding: 5px;
   font-size: 2em;
 }
+
+.general-alert{
+  margin: auto;
+  width: 70%;
+  margin-top: 15px;
+}
