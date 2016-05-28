@@ -57,7 +57,6 @@ auth_router.getRouter().get("/get_inventory_image", inventory_route.httpGetInven
 /////////////////
 
 app.use("/aroma/secure", auth_router.getRouter());
-app.use("/aroma/secure/single_image", auth_router.getRouter())
 
 
 app.listen(port, '0.0.0.0');

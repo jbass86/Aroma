@@ -14,10 +14,6 @@ module.exports = class AuthenticateRouter {
 
     _this.router.use((req, res, next) => {
 
-      console.log(req.body);
-      console.log(req.file);
-      console.log("WOOOOOOOOOOOOOOOOOOOO");
-
       // check header or url parameters or post parameters for token
       var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
