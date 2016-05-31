@@ -10,7 +10,7 @@ css = require("./res/css/inventory.css")
 module.exports = React.createClass
 
   getInitialState: ->
-    {show_create_inventory: false};
+    {};
 
   componentDidMount: ->
     console.log("mounted inventory component");
@@ -21,13 +21,8 @@ module.exports = React.createClass
       <div className="section-title">
         Inventory
       </div>
-      <div className="create-inventory">
-        <button type="button" className="inventory-mod-button btn btn-info" onClick={@showCreateInventory}>Add Item</button>
-        <div className="clear-both"></div>
-        <div className={@getCreateInventoryClasses()}>
-          <CreateInventory close_event={@closeEvent} />
-        </div>
-      </div>
+
+      <CreateInventory />
 
       <div className="filter-inventory">
         <button type="button" className="inventory-mod-button btn btn-info">Add Filter</button>
@@ -36,19 +31,3 @@ module.exports = React.createClass
         </div>
       </div>
     </div>
-
-  getCreateInventoryClasses: ->
-
-    classes = "collapsible"
-    if (@state.show_create_inventory)
-      classes += " full-height-medium";
-    else
-      classes += " no-height";
-    classes
-
-  showCreateInventory: (ev) ->
-    console.log("show create inventory");
-    @setState({show_create_inventory: true});
-
-  closeEvent: ->
-    @setState({show_create_inventory: false});

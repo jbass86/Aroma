@@ -6,7 +6,7 @@ css = require("./res/css/navigation_bar.css");
 module.exports = React.createClass
 
   getInitialState: ->
-    {nav_visible: false, nav_selection: "inventory"};
+    {nav_visible: false, nav_selection: ["inventory"]};
 
   componentDidMount: ->
 
@@ -18,7 +18,7 @@ module.exports = React.createClass
   render: ->
 
     <div class="row">
-    
+
       <div className={"nav-bar-view collapsible-real" + if @state.nav_visible then " col-xs-6 col-md-4" else " no-width"}>
         <h2 className="nav-header">
           <span>Aroma</span>
@@ -37,7 +37,7 @@ module.exports = React.createClass
     console.log("get nav selections");
     console.log(name);
     classes = "nav-selection label";
-    if (@state.nav_selection == name)
+    if (@state.nav_selection.includes(name))
       classes += " label-success";
     else
       classes += " label-default";
@@ -45,6 +45,15 @@ module.exports = React.createClass
 
   selectNavView: (name, event) ->
 
-    @setState({nav_selection: name}, () =>
-      @props.nav_model.set("nav_selection", @state.nav_selection);
+    selections = @state.nav_selection;
+    if (selections.includes(name) and selections.length > 1)
+      selections.splice(selections.indexOf(name), 1);
+    else
+      selections.push(name);
+
+    @setState({nav_selection: selections}, () =>
+      @props.nav_model.set("nav_selection", selections);
+      @props.nav_model.trigger("change:nav_selection", selections);
     );
+
+    console.log(selections)

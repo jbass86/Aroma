@@ -13,37 +13,52 @@ css = require("./res/css/create_inventory.css");
 module.exports = React.createClass
 
   getInitialState: ->
-    @default_state = {name: "", type: "", acquire_location: "", acquire_date: Moment(), \
+    @default_state = {show_create_inventory: false, name: "", type: "", acquire_location: "", acquire_date: Moment(), \
       cost: "0.00", receipt: "", receipt_files: undefined, item_alert: "", item_success: false};
 
   componentDidMount: ->
 
   render: ->
 
-    <div className="add-inventory">
+    <div className="create-inventory">
+      <button type="button" className="inventory-mod-button btn btn-info" onClick={@showCreateInventory}>Add Item</button>
+      <div className="clear-both"></div>
+      <div className={@getCreateInventoryClasses()}>
+        <div className="add-inventory">
 
-      {@createInputField("name", "Name:", "text")}
-      {@createInputField("type", "Type:", "text")}
+          {@createInputField("name", "Name:", "text")}
+          {@createInputField("type", "Type:", "text")}
 
-      <div className="inventory-input-field">
-        <div className="inventory-input-label">
-          Acquire Date:
+          <div className="inventory-input-field">
+            <div className="inventory-input-label">
+              Acquire Date:
+            </div>
+            <DatePicker className="inventory-date-field" selected={@state.acquire_date} onChange={@handleAcquireDate} todayButton={'Today'} />
+            <div className="clear-both"></div>
+          </div>
+
+          {@createInputField("acquire_location", "Acquire Location:", "text")}
+          {@createInputField("cost", "Cost:", "number")}
+          {@createInputField("receipt", "Receipt:", "file")}
+
+          {@getCreateItemAlert()}
+
+          <div className="inventory-create-buttons">
+            <button className="btn btn-success" onClick={@handleCreateItem}>Create Item</button>
+            <button className="btn btn-danger" onClick={@handleClose}>Cancel</button>
+          </div>
         </div>
-        <DatePicker className="inventory-date-field" selected={@state.acquire_date} onChange={@handleAcquireDate} todayButton={'Today'} />
-        <div className="clear-both"></div>
-      </div>
-
-      {@createInputField("acquire_location", "Acquire Location:", "text")}
-      {@createInputField("cost", "Cost:", "number")}
-      {@createInputField("receipt", "Receipt:", "file")}
-
-      {@getCreateItemAlert()}
-
-      <div className="inventory-create-buttons">
-        <button className="btn btn-success" onClick={@handleCreateItem}>Create Item</button>
-        <button className="btn btn-danger" onClick={@handleClose}>Cancel</button>
       </div>
     </div>
+
+  getCreateInventoryClasses: ->
+
+    classes = "collapsible"
+    if (@state.show_create_inventory)
+      classes += " full-height-medium";
+    else
+      classes += " no-height";
+    classes
 
   getCreateItemAlert: () ->
     success = if (@state.item_success) then " alert-success" else " alert-danger";
@@ -120,8 +135,13 @@ module.exports = React.createClass
 
     });
 
+  showCreateInventory: (ev) ->
+    console.log("show create inventory");
+    @setState({show_create_inventory: true});
+
+
   handleClose: () ->
-    @props.close_event(@state.item_success);
+    @setState({show_create_inventory: false});
     window.setTimeout(() =>
       @setState(@default_state)
     , 1000);

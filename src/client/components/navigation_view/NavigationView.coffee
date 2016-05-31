@@ -5,7 +5,7 @@ React = require("react");
 module.exports = React.createClass
 
   getInitialState: ->
-    {current_selection: ""};
+    {current_selection: []};
 
   componentDidMount: ->
     @setState({current_selection: @props.nav_model.get("nav_selection")});
@@ -21,5 +21,7 @@ module.exports = React.createClass
 
   getClasses: ->
     classes = "";
-    if (@state.current_selection != @props.name)
+    console.log("nav classes!!!!");
+    console.log(@state.current_selection);
+    if (!@state.current_selection.includes(@props.name))
       classes += " display-none";
