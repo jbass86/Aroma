@@ -1,0 +1,23 @@
+
+.inventory-table-entry{
+
+  border: 1px solid white;
+  margin: 10px;
+  padding: 15px 0;
+}
+
+.inventory-table-entry:hover{
+  border: 2px solid orange;
+}
+
+.inventory-row{
+  text-align: center;
+}
+
+.inventory-info-section{
+  width: 80%;
+  border: 1px solid grey;
+
+  text-align: center;
+  margin: auto;
+}

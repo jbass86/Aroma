@@ -115,7 +115,7 @@ module.exports = React.createClass
 
     console.log("made form data");
     $.ajax({
-      url: 'aroma/secure/single_image/update_inventory',
+      url: 'aroma/secure/update_inventory',
       data: form,
       cache: false,
       contentType: false,

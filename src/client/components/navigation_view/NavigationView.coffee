@@ -15,7 +15,7 @@ module.exports = React.createClass
 
   render: ->
 
-    <div style={{"width": "100%", "height": "100%"}} className={@getClasses()}>
+    <div className={@getClasses()}>
       {@props.children}
     </div>
 

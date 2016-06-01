@@ -55,19 +55,6 @@ module.exports = class InventoryRoute {
     }
   }
 
-  httpGetInventoryImage(req, res){
-
-    var db = this.db_coord.getDatabaseInstance();
-    var token = req.decoded;
-
-    var image_collection = db.collection(token.group + ".inventory.images");
-    image_collection.findOne((err, doc) => {
-      console.log("got the doc");
-      console.log(doc);
-      res.send(doc);
-    });
-  }
-
   httpGetItems(req, res){
 
     var db = this.db_coord.getDatabaseInstance();
@@ -75,6 +62,23 @@ module.exports = class InventoryRoute {
 
     var collection = db.collection(token.group + ".inventory");
 
-    res.send({});
+    var cursor = collection.find({});
+    cursor.toArray().then((items) => {
+      console.log(items);
+      res.send({success: true, results: items});
+    });
+
+
+  }
+
+  httpGetInventoryImage(req, res){
+
+    var db = this.db_coord.getDatabaseInstance();
+    var token = req.decoded;
+
+    var image_collection = db.collection(token.group + ".inventory.images");
+    image_collection.findOne((err, doc) => {
+      res.send(doc);
+    });
   }
 }

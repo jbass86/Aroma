@@ -9,11 +9,15 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f3f3f', endColorstr='#0e0e0e',GradientType=0 ); /* IE6-9 */
 
   width: 93%;
-  height: 93%;
+  min-height: 93%;
 
   border-radius: 4px;
 
+
   margin: auto;
+  margin-bottom: 25px;
+  padding-top: 10px;
+  padding-bottom: 25px;
 }
 
 .section-title{
