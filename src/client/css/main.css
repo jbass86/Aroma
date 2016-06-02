@@ -31,7 +31,6 @@ body {
   width: 100vw;
 }
 
-
 .nav-no-width{
   width: 0%;
 }
@@ -61,4 +60,18 @@ body {
 
 .mast-panel{
   padding-bottom: 60px;
+}
+
+@media only screen
+and (max-device-width: 768px)
+and (orientation: portrait) {
+  .header-area{
+    height: 150px;
+  }
+
+  .main-area{
+
+    height: calc(100vh - 150px);
+    height: -moz-calc(100vh - 150px);
+  }
 }

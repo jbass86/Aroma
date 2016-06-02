@@ -29,12 +29,13 @@ module.exports = React.createClass
           {@createInputField("name", "Name:", "text")}
           {@createInputField("type", "Type:", "text")}
 
-          <div className="inventory-input-field">
-            <div className="inventory-input-label">
+          <div className="row inventory-create-row">
+            <div className="col-md-4">
               Acquire Date:
             </div>
-            <DatePicker className="inventory-date-field" selected={@state.acquire_date} onChange={@handleAcquireDate} todayButton={'Today'} />
-            <div className="clear-both"></div>
+            <div className="col-md-8">
+              <DatePicker className="inventory-input-field" selected={@state.acquire_date} onChange={@handleAcquireDate} todayButton={'Today'} />
+            </div>
           </div>
 
           {@createInputField("acquire_location", "Acquire Location:", "text")}
@@ -43,9 +44,9 @@ module.exports = React.createClass
 
           {@getCreateItemAlert()}
 
-          <div className="inventory-create-buttons">
-            <button className="btn btn-success" onClick={@handleCreateItem}>Create Item</button>
-            <button className="btn btn-danger" onClick={@handleClose}>Cancel</button>
+          <div className="row inventory-create-buttons">
+            <button className="col-md-6 btn btn-success" onClick={@handleCreateItem}>Create Item</button>
+            <button className="col-md-6 btn btn-danger" onClick={@handleClose}>Cancel</button>
           </div>
         </div>
       </div>
@@ -75,14 +76,15 @@ module.exports = React.createClass
 
   createInputField: (name, display_name, type) ->
 
-    input_class = if (type == "file") then "inventory-file-input" else "inventory-input";
+    input_class = if (type == "file") then "inventory-file-input" else "inventory-input-field";
 
-    <div className="inventory-input-field">
-      <div className="inventory-input-label">
+    <div className="row inventory-create-row">
+      <div className="col-md-4">
         {display_name}
       </div>
-      <input className={input_class} type={type} accept="image/*" onChange={(event)=>@handleFieldUpdate(name, event)} />
-      <div className="clear-both"></div>
+      <div className="col-md-8">
+        <input type={type} className={input_class} accept="image/*" onChange={(event)=>@handleFieldUpdate(name, event)} />
+      </div>
     </div>
 
   handleFieldUpdate: (field_name, event) ->
@@ -127,12 +129,11 @@ module.exports = React.createClass
         @setState({item_alert: response.message, item_success: response.success});
       success: (data) =>
         response = JSON.parse(data);
-        console.log(response);
         @setState({item_alert: response.message, item_success: response.success});
+        @props.inventoryUpdate();
         window.setTimeout(() =>
           @handleClose();
         , 2000);
-
     });
 
   showCreateInventory: (ev) ->

@@ -15,10 +15,8 @@ module.exports = React.createClass
 
   componentDidMount: ->
     console.log("mounted inventory component");
-    $.get("aroma/secure/get_inventory", {token: window.sessionStorage.token}, (response) =>
-      if (response.success)
-        @setState(inventory_items: response.results);
-    );
+    @updateInventory();
+
 
   render: ->
 
@@ -27,15 +25,14 @@ module.exports = React.createClass
         Inventory
       </div>
 
-      <CreateInventory />
-
-      <div className="filter-inventory">
-        <button type="button" className="inventory-mod-button btn btn-info">Add Filter</button>
-        <div className="clear-both"></div>
-        <div>
-        </div>
-      </div>
+      <CreateInventory inventoryUpdate={@updateInventory}/>
 
       <InventoryTable items={@state.inventory_items} />
-
     </div>
+
+  updateInventory: () ->
+    #this will eventually use the filters...
+    $.get("aroma/secure/get_inventory", {token: window.sessionStorage.token}, (response) =>
+      if (response.success)
+        @setState(inventory_items: response.results);
+    );

@@ -27,8 +27,8 @@ module.exports = class LoginRoute {
         }else{
           if (item){
             if (bcrypt.compareSync(req.body.password, item.password)){
-              var token = jsonwebtoken.sign({username: item.username, group: "Default"}, _this.auth_model.get("token_pw"));
-              res.send({success: true, message: "Authentication Sucess!!", token});
+              var token = jsonwebtoken.sign({username: item.username, group: "default"}, _this.auth_model.get("token_pw"));
+              res.send({success: true, message: "Authentication Sucess!!", token: token, username: item.username, group: item.group});
             }else{
               res.send({success: false, message: "Username/Password Incorrect", token});
             }
@@ -43,6 +43,6 @@ module.exports = class LoginRoute {
   }
 
   httpValidateSession(req, res){
-    res.send({success: true, message: "Token Validated"});
+    res.send({success: true, message: "Token Validated", username: req.decoded.username, group: req.decoded.group});
   }
 }

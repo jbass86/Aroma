@@ -100,8 +100,9 @@ $(() ->
         classes += " fade-out"
       classes;
 
-    handleLoginSuccess: (token) ->
-      window.sessionStorage.token = token;
+    handleLoginSuccess: (login_data) ->
+      window.sessionStorage.token = login_data.token;
+      window.user_info = {username: login_data.username, group: login_data.group};
       @setState({authenticated: true});
       window.setTimeout(()=>
         @setState({remove_login: true});
@@ -109,6 +110,9 @@ $(() ->
 
   if (window.sessionStorage.token)
     $.post("aroma/secure/authenticate_token", {token: window.sessionStorage.token}, (response) =>
+      window.user_info = {username: response.username, group: response.group};
+      console.log("user info!!!");
+      console.log(window.user_info);
       nav_model.set("authenticated", response.success);
       nav_model.set("remove_login", response.success);
       ReactDOM.render(React.createElement(comp, null), $("#react-body").get(0));

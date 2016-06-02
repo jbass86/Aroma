@@ -19,8 +19,9 @@ module.exports = React.createClass
   render: ->
 
     <div className="header-bar unselectable">
-      <span className="glyphicon glyphicon-menu-hamburger menu-button" onClick={@menuButtonClicked} />
-      <span className="time-readout">{@state.time}</span>
+      <span className="glyphicon glyphicon-menu-hamburger menu-glyph nav-button" onClick={@menuButtonClicked} />
+      <span className="user-name">{window.user_info.username}</span>
+      <span className="glyphicon glyphicon-log-out menu-glyph logout-button" onClick={@logout}></span>
     </div>
 
   getAlertClasses: () ->
@@ -32,3 +33,7 @@ module.exports = React.createClass
 
   menuButtonClicked: (ev) ->
     @props.nav_model.set("nav_visible", !@props.nav_model.get("nav_visible"));
+
+  logout: (ev) ->
+    window.sessionStorage.token = undefined;
+    window.location.reload(true);

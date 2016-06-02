@@ -32,8 +32,6 @@ module.exports = class InventoryRoute {
         item.image_ref = uuid.v4();
       }
       req.file._id = item.image_ref;
-      console.log("update file");
-      console.log(req.file);
       image_collection.update({_id: req.file._id}, req.file, {upsert: true});
     }
 

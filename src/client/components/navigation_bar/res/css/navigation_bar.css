@@ -49,3 +49,13 @@
 .nav-selection:hover{
   border: 2px solid orange;
 }
+
+@media only screen
+and (max-device-width: 768px)
+and (orientation: portrait) {
+
+  .nav-bar-view{
+    top: 150px;
+    height: calc(100% - 150px);
+  }
+}

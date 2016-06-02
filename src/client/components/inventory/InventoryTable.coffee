@@ -21,7 +21,7 @@ module.exports = React.createClass
     <div style={{"margin": "auto"}} className="inventory-table">
 
       {@props.items.map((item, index) =>
-        <div className="inventory-table-entry">
+        <div className="inventory-table-entry" key={item._id}>
 
           <div className="row inventory-row">
             <div className="col-md-4">{item.name}</div>

@@ -48,7 +48,7 @@ module.exports = React.createClass
 
   getLoginAlert: () ->
     if (@state.login_alert)
-      console.log("show failed stuff...")
+      console.log("show failed stuff...");
       <div className="login-alert alert alert-danger alert-dismissible" role="alert">
          <button type="button" className="close" aria-label="Close" onClick={@dismissAlert}><span aria-hidden="true">&times;</span></button>
          <strong>Error!</strong>  {@state.login_alert}
@@ -78,7 +78,7 @@ module.exports = React.createClass
       if (!response.success)
         @setState(login_alert: response.message);
       else
-        @props.login_success(response.token);
+        @props.login_success({token: response.token, username: response.username, group: response.group});
     );
 
   handleCreateUser: (event) ->

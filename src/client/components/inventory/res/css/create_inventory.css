@@ -1,4 +1,9 @@
 
+.create-inventory .inventory-mod-button {
+  margin: 5px;
+  float: right;
+}
+
 .add-inventory {
 
   border: 1px solid white;
@@ -8,27 +13,22 @@
   margin: auto;
 }
 
-.add-inventory .inventory-input-field{
+.create-inventory .inventory-mod-button {
+  margin: 5px;
+  float: right;
+}
+
+.add-inventory .inventory-create-row{
   margin: 10px;
 }
 
-.add-inventory .inventory-input-field .inventory-input-label{
-
-  color: white;
-
-  float: left;
-  width: 25%;
-}
-
-.add-inventory .inventory-input-field .inventory-input{
+.add-inventory .inventory-input-field{
   color: black;
-  float: left;
-  width: 65%;
+  width: 100%;
 }
 
-.add-inventory .inventory-input-field .inventory-file-input{
+.add-inventory .inventory-file-input{
   color: white;
-  float: left;
 }
 
 .add-inventory .inventory-input-field .inventory-date-field{
@@ -43,4 +43,19 @@
   padding-top: 5px;
   padding-bottom: 5px;
   text-align: center;
+}
+
+@media only screen
+and (max-device-width: 768px) {
+  .create-inventory .inventory-mod-button {
+    font-size: 115%;
+  }
+
+  .add-inventory .inventory-create-buttons .btn{
+    font-size: 100%;
+  }
+
+  .add-inventory .inventory-file-input{
+    padding-top: 25px;
+  }
 }

@@ -1,9 +1,13 @@
 
-.inventory-view{
+.inventory-view {
   color: white;
 }
 
-.inventory-view .inventory-mod-button{
-  margin: 5px;
-  float: right;
+
+@media only screen
+and (max-device-width: 768px) {
+
+  .inventory-view {
+    font-size: 300%;
+  }
 }
