@@ -21,7 +21,5 @@ module.exports = React.createClass
 
   getClasses: ->
     classes = "";
-    console.log("nav classes!!!!");
-    console.log(@state.current_selection);
     if (!@state.current_selection.includes(@props.name))
       classes += " display-none";

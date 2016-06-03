@@ -75,8 +75,14 @@ module.exports = class InventoryRoute {
     var token = req.decoded;
 
     var image_collection = db.collection(token.group + ".inventory.images");
-    image_collection.findOne((err, doc) => {
-      res.send(doc);
+
+    image_collection.findOne({image_ref: req.body.image_ref}, (err, doc) => {
+      if (doc){
+        console.log("found the image!!!! returning it...")
+        res.send({success: true, image: doc});
+      }else{
+        res.send({success: false, message: "Could Not Find Image Ref"});
+      }
     });
   }
 }

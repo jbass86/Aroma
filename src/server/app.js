@@ -36,6 +36,10 @@ app.get("/aroma", function(req, res){
   res.sendFile(path.join(__dirname + "/index.html"));
 });
 
+app.get("/no_image", function(req, res){
+  res.sendFile(path.join(__dirname + "/client/assets/inventory/res/images/no_image.png"));
+});
+
 var auth_model = new Backbone.Model();
 auth_model.set("token_pw", token_pw);
 var mongo_coord = new MongoCoordinator({});

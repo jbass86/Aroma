@@ -44,6 +44,7 @@ module.exports = React.createClass
 
           {@getCreateItemAlert()}
 
+
           <div className="row inventory-create-buttons">
             <button className="col-md-6 btn btn-success" onClick={@handleCreateItem}>Create Item</button>
             <button className="col-md-6 btn btn-danger" onClick={@handleClose}>Cancel</button>
@@ -115,7 +116,7 @@ module.exports = React.createClass
     if (@state.receipt)
       form.append("file", @state.receipt_files[0]);
 
-    console.log("made form data");
+  
     $.ajax({
       url: 'aroma/secure/update_inventory',
       data: form,

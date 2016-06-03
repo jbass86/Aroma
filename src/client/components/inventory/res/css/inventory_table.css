@@ -12,12 +12,31 @@
 
 .inventory-row{
   text-align: center;
+  padding: 10px;
 }
 
 .inventory-info-section{
-  width: 80%;
-  border: 1px solid grey;
 
+  text-align: left;
+
+  width: 50%;
   text-align: center;
   margin: auto;
+}
+
+.inventory-info-section table{
+  text-align: center;
+}
+
+.inventory-info-section table td{
+  border: 1px solid white;
+  padding: 10px 15px;
+  vertical-align: center;
+}
+
+@media only screen
+and (max-device-width: 768px){
+  .inventory-info-section{
+    width: 90%;
+  }
 }

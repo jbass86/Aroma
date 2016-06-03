@@ -47,6 +47,13 @@ var compile_client = function(b, debug){
   .pipe(gulp.dest("dist/client"));
 }
 
+var copy_assets = function(){
+  gulp.src("./node_modules/bootstrap/fonts/*")
+    .pipe(gulp.dest("dist/client/assets"));
+  gulp.src("./src/client/components/**/res/images/**")
+    .pipe(gulp.dest("dist/client/assets"));
+}
+
 gulp.task("clean", function(cb){
   del("dist", {force: true}, cb);
   cb();
@@ -55,17 +62,15 @@ gulp.task("clean", function(cb){
 gulp.task("build-client-dev", function(cb){
   var b = browserify_client(true);
   compile_client(b, true);
-  gulp.src("./node_modules/bootstrap/fonts/*")
-    .pipe(gulp.dest("dist/client/assets"));
+  copy_assets();
   cb();
 });
 
 gulp.task("build-client", function(cb){
   var b = browserify_client(false);
   compile_client(b, false);
-  gulp.src("./node_modules/bootstrap/fonts/*")
-    .pipe(gulp.dest("dist/client/assets"));
-    cb();
+  copy_assets();
+  cb();
 });
 
 gulp.task("watchify-client", ["build-client-dev"], function(cb){
