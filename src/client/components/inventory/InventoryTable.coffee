@@ -11,7 +11,7 @@ css = require("./res/css/inventory.css")
 module.exports = React.createClass
 
   getInitialState: ->
-    {expanded_rows: [], image_cache: {}, editing_item: undefined};
+    {expanded_rows: {}, image_cache: {}, editing_item: undefined, confirming_delete: {}};
 
   componentDidMount: ->
 
@@ -42,7 +42,34 @@ module.exports = React.createClass
     else
       info_classes += " no-height";
 
+    delete_alert_classes = "collapsible"
+    if (@state.confirming_delete[item._id])
+      delete_alert_classes += " full-height-small";
+    else
+      delete_alert_classes += " no-height";
+
     <div className={info_classes}>
+
+      <div className="row item-edit-buttons">
+        <button className="col-xs-6 btn btn-info">
+          <span className="glyphicon glyphicon-edit"></span>
+        </button>
+        <button className="col-xs-6 btn btn-danger" onClick={@confirmDelete.bind(@, item)}>
+          <span className="glyphicon glyphicon-trash"></span>
+        </button>
+      </div>
+
+      <div className={delete_alert_classes}>
+        <div className="delete-item-alert alert alert-danger" role="alert">
+           <span>Are you Sure?</span>
+           <div className="row">
+             <button className="col-xs-6 btn btn-success" onClick={@deleteItem.bind(@, item)}>Yes</button>
+             <button className="col-xs-6 btn btn-danger" onClick={@confirmDelete.bind(@, item)}>No</button>
+           </div>
+        </div>
+      </div>
+
+
       <div className="inventory-info-section">
 
         <table>
@@ -85,7 +112,7 @@ module.exports = React.createClass
   expandRow: (item) ->
     if(@state.expanded_rows[item._id])
       delete @state.expanded_rows[item._id]
-      if (item.image_ref and @state.image_cache[item.image_ref])  
+      if (item.image_ref and @state.image_cache[item.image_ref])
         window.setTimeout(() =>
           delete @state.image_cache[item.image_ref];
           @setState({image_cache: @state.image_cache});
@@ -99,6 +126,17 @@ module.exports = React.createClass
             @setState({image_cache: @state.image_cache});
         );
     @setState({expanded_rows: @state.expanded_rows, image_cache: @state.image_cache});
+
+  confirmDelete: (item) ->
+    if(@state.confirming_delete[item._id])
+      delete @state.confirming_delete[item._id]
+    else
+      @state.confirming_delete[item._id] = item;
+    @setState({confirming_delete: @state.confirming_delete})
+
+  deleteItem: (item) ->
+    console.log("here we need to delete the item...");
+    @confirmDelete(item);
 
   getReceiptImage: (item) ->
     if (@state.image_cache[item.image_ref])

@@ -10,6 +10,26 @@
   border: 2px solid orange;
 }
 
+.inventory-table-entry .item-edit-buttons{
+
+  width: 180px;
+  padding: 10px;
+  margin: auto;
+}
+
+.inventory-table-entry .item-edit-buttons button{
+  font-size: 140%;
+  width: 80px;
+  height: 60px;
+}
+
+.inventory-table-entry .delete-item-alert{
+  width: 200px;
+  padding: 10px 15px;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
 .inventory-row{
   text-align: center;
   padding: 10px;
@@ -38,5 +58,18 @@
 and (max-device-width: 768px){
   .inventory-info-section{
     width: 90%;
+  }
+
+  .inventory-table-entry .item-edit-buttons button{
+    font-size: 120%;
+    height: 80px;
+  }
+
+  .inventory-table-entry .delete-item-alert{
+    width: 300px;
+  }
+
+  .inventory-table-entry .delete-item-alert .btn{
+    font-size: 100%;
   }
 }
