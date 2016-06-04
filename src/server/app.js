@@ -30,7 +30,9 @@ app.use(body_parser.urlencoded({
   extended: true
 }));
 
-app.use(upload.single('file'));
+
+//app.use(upload.single("file"));
+app.use(upload.any());
 
 app.get("/aroma", function(req, res){
   res.sendFile(path.join(__dirname + "/index.html"));

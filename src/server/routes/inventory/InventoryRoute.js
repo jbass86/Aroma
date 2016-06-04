@@ -27,12 +27,19 @@ module.exports = class InventoryRoute {
       status: "new"
     };
 
-    if (req.file){
-      if (!item.image_ref){
-        item.image_ref = uuid.v4();
+    console.log("my files!!!!");
+    console.log(req.files);
+
+    if (req.files){
+      for(var i = 0; i < req.files.length; i++){
+        if (req.files[i].fieldname == "receipt_file"){
+          if (!item.image_ref){
+            item.image_ref = uuid.v4();
+          }
+          req.files[i]._id = item.image_ref;
+          image_collection.update({_id: req.files[i]._id}, req.files[i], {upsert: true});
+        }
       }
-      req.file._id = item.image_ref;
-      image_collection.update({_id: req.file._id}, req.file, {upsert: true});
     }
 
     var cb = (err, result) => {
@@ -47,8 +54,6 @@ module.exports = class InventoryRoute {
     if (item._id){
       collection.update({_id: item._id}, item, {upsert: true}, cb);
     }else{
-      console.log("insert item");
-      console.log(item);
       collection.insert(item, cb);
     }
   }
@@ -62,7 +67,6 @@ module.exports = class InventoryRoute {
 
     var cursor = collection.find({});
     cursor.toArray().then((items) => {
-      console.log(items);
       res.send({success: true, results: items});
     });
 
@@ -76,9 +80,8 @@ module.exports = class InventoryRoute {
 
     var image_collection = db.collection(token.group + ".inventory.images");
 
-    image_collection.findOne({image_ref: req.body.image_ref}, (err, doc) => {
+    image_collection.findOne({_id: req.query.image_ref}, (err, doc) => {
       if (doc){
-        console.log("found the image!!!! returning it...")
         res.send({success: true, image: doc});
       }else{
         res.send({success: false, message: "Could Not Find Image Ref"});

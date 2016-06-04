@@ -14,7 +14,7 @@ module.exports = React.createClass
 
   getInitialState: ->
     @default_state = {show_create_inventory: false, name: "", type: "", acquire_location: "", acquire_date: Moment(), \
-      cost: "0.00", receipt: "", receipt_files: undefined, item_alert: "", item_success: false};
+      cost: "0.00", receipt: "", receipt_files: undefined, item_image: "", item_image_files: undefined, item_alert: "", item_success: false};
 
   componentDidMount: ->
 
@@ -40,6 +40,7 @@ module.exports = React.createClass
 
           {@createInputField("acquire_location", "Acquire Location:", "text")}
           {@createInputField("cost", "Cost:", "number")}
+          {@createInputField("item_image", "Item Image:", "file")}
           {@createInputField("receipt", "Receipt:", "file")}
 
           {@getCreateItemAlert()}
@@ -84,7 +85,7 @@ module.exports = React.createClass
         {display_name}
       </div>
       <div className="col-md-8">
-        <input type={type} className={input_class} accept="image/*" onChange={(event)=>@handleFieldUpdate(name, event)} />
+        <input type={type} className={input_class} accept="image/*" value={@state[name]} onChange={(event)=>@handleFieldUpdate(name, event)} />
       </div>
     </div>
 
@@ -94,7 +95,10 @@ module.exports = React.createClass
     if (event.target.type == "number")
       value = mathjs.round(value, 2);
     if (event.target.type == "file")
-      update.receipt_files = event.target.files;
+      if (field_name == "receipt")
+        update.receipt_files = event.target.files;
+      else if (field_name == "item_image")
+        update.item_image_files = event.target.files;
 
     update[field_name] = value;
     @setState(update, () => console.log(@state));
@@ -114,9 +118,10 @@ module.exports = React.createClass
     form.append("receipt_name", @state.receipt);
 
     if (@state.receipt)
-      form.append("file", @state.receipt_files[0]);
+      form.append("receipt_file", @state.receipt_files[0]);
+    if (@state.item_image)
+      form.append("item_image_file", @state.item_image_files[0]);
 
-  
     $.ajax({
       url: 'aroma/secure/update_inventory',
       data: form,
@@ -138,12 +143,13 @@ module.exports = React.createClass
     });
 
   showCreateInventory: (ev) ->
-    console.log("show create inventory");
     @setState({show_create_inventory: true});
 
 
   handleClose: () ->
     @setState({show_create_inventory: false});
     window.setTimeout(() =>
-      @setState(@default_state)
+      console.log("default stat is ");
+      console.log(@default_state);
+      @setState(@default_state);
     , 1000);

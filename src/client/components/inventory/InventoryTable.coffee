@@ -62,7 +62,7 @@ module.exports = React.createClass
       <div className={delete_alert_classes}>
         <div className="delete-item-alert alert alert-danger" role="alert">
            <span>Are you Sure?</span>
-           <div className="row">
+           <div style={{"marginTop": "10px"}} className="row">
              <button className="col-xs-6 btn btn-success" onClick={@deleteItem.bind(@, item)}>Yes</button>
              <button className="col-xs-6 btn btn-danger" onClick={@confirmDelete.bind(@, item)}>No</button>
            </div>

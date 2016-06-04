@@ -27,8 +27,6 @@ module.exports = class AuthenticateRouter {
           } else {
             // if everything is good, save to request for use in other routes
             req.decoded = decoded;
-            console.log("my decoded token");
-            console.log(decoded);
             next();
           }
         });
