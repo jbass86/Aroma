@@ -118,7 +118,7 @@ module.exports = React.createClass
     form.append("receipt_name", @state.receipt);
 
     if (@state.receipt)
-      form.append("receipt_file", @state.receipt_files[0]);
+      form.append("receipt_image_file", @state.receipt_files[0]);
     if (@state.item_image)
       form.append("item_image_file", @state.item_image_files[0]);
 

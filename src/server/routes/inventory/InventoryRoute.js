@@ -1,5 +1,6 @@
 "use strict";
 
+var ObjectId = require("mongodb").ObjectId;
 var uuid = require("node-uuid");
 
 module.exports = class InventoryRoute {
@@ -27,16 +28,19 @@ module.exports = class InventoryRoute {
       status: "new"
     };
 
-    console.log("my files!!!!");
-    console.log(req.files);
-
     if (req.files){
       for(var i = 0; i < req.files.length; i++){
-        if (req.files[i].fieldname == "receipt_file"){
-          if (!item.image_ref){
-            item.image_ref = uuid.v4();
+        if (req.files[i].fieldname == "receipt_image_file"){
+          if (!item.receipt_image_ref){
+            item.receipt_image_ref = uuid.v4();
           }
-          req.files[i]._id = item.image_ref;
+          req.files[i]._id = item.receipt_image_ref;
+          image_collection.update({_id: req.files[i]._id}, req.files[i], {upsert: true});
+        }else if (req.files[i].fieldname == "item_image_file"){
+          if (!item.item_image_ref){
+            item.item_image_ref = uuid.v4();
+          }
+          req.files[i]._id = item.item_image_ref;
           image_collection.update({_id: req.files[i]._id}, req.files[i], {upsert: true});
         }
       }
@@ -46,7 +50,6 @@ module.exports = class InventoryRoute {
       if (err){
         res.send({sucess: false, message: "Error Creating Item"});
       }else{
-        console.log("it was a success!!!");
         res.send({success: true, message: "Item Created Sucessfully"});
       }
     }
@@ -69,8 +72,47 @@ module.exports = class InventoryRoute {
     cursor.toArray().then((items) => {
       res.send({success: true, results: items});
     });
+  }
 
+  httpDeleteItems(req, res){
 
+    console.log("got into the delete route...");
+
+    var db = this.db_coord.getDatabaseInstance();
+    var token = req.decoded;
+
+    var collection = db.collection(token.group + ".inventory");
+    var image_collection = db.collection(token.group + ".inventory.images");
+
+    var delete_filter = {$or: []};
+    var image_delete_filter = {$or: []};
+
+    var delete_items = req.body.items_to_delete;
+    delete_items.forEach((item) => {
+      delete_filter.$or.push({_id: ObjectId(item._id)});
+      if (item.receipt_image_ref){
+        image_delete_filter.$or.push({_id: ObjectId(item.receipt_image_ref)});
+      }
+      if (item.item_image_ref){
+        image_delete_filter.$or.push({_id: ObjectId(item.item_image_ref)});
+      }
+    });
+
+    console.log("my delete filters...")
+    console.log(delete_filter);
+    console.log(image_delete_filter);
+    var promise = collection.deleteMany(delete_filter);
+    image_collection.deleteMany(image_delete_filter);
+
+    promise.then((arg) => {
+      console.log("got the promise");
+      console.log(arg);
+      if (arg.result.ok){
+        res.send({success: true});
+      }else{
+        res.send({success: true});
+      }
+    });
   }
 
   httpGetInventoryImage(req, res){

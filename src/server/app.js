@@ -59,6 +59,7 @@ auth_router.getRouter().post("/authenticate_token", login_route.httpValidateSess
 
 auth_router.getRouter().post("/update_inventory", inventory_route.httpPostUpdateItem.bind(inventory_route));
 auth_router.getRouter().get("/get_inventory", inventory_route.httpGetItems.bind(inventory_route));
+auth_router.getRouter().post("/delete_inventory", inventory_route.httpDeleteItems.bind(inventory_route));
 auth_router.getRouter().get("/get_inventory_image", inventory_route.httpGetInventoryImage.bind(inventory_route));
 /////////////////
 

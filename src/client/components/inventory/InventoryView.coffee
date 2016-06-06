@@ -27,7 +27,7 @@ module.exports = React.createClass
 
       <CreateInventory inventoryUpdate={@updateInventory}/>
 
-      <InventoryTable items={@state.inventory_items} />
+      <InventoryTable inventoryUpdate={@updateInventory} items={@state.inventory_items} />
     </div>
 
   updateInventory: () ->

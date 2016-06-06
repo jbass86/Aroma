@@ -3,10 +3,9 @@
 css = require("./res/css/inventory_table.css");
 
 React = require("react");
-
 CreateInventory = require("./CreateInventory.coffee");
 
-css = require("./res/css/inventory.css")
+ObjectCache = require("utilities/ObjectCache.coffee");
 
 module.exports = React.createClass
 
@@ -136,6 +135,12 @@ module.exports = React.createClass
 
   deleteItem: (item) ->
     console.log("here we need to delete the item...");
+    $.post("aroma/secure/delete_inventory", {token: window.sessionStorage.token, items_to_delete: [item]}, (response) =>
+      if (response.success)
+        console.log("it worked....");
+        @props.inventoryUpdate();
+    )
+
     @confirmDelete(item);
 
   getReceiptImage: (item) ->
