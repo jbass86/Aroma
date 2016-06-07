@@ -3,9 +3,12 @@
 css = require("./res/css/inventory_table.css");
 
 React = require("react");
-CreateInventory = require("./CreateInventory.coffee");
+InventoryEdit = require("./InventoryEdit.coffee");
+Moment = require("moment");
 
 ObjectCache = require("utilities/ObjectCache.coffee");
+
+#<InventoryEdit initialState={name: item.name, type: item.type, acquire_date: Moment(new Date(item.acquire_date))}/>
 
 module.exports = React.createClass
 
@@ -23,9 +26,10 @@ module.exports = React.createClass
         <div className="inventory-table-entry" key={item._id}>
 
           <div className="row inventory-row" onClick={@expandRow.bind(@, item)}>
-            <div className="col-md-4">{item.name}</div>
-            <div className="col-md-4">{item.type}</div>
-            <div className="col-md-4">{item.status}</div>
+            <div className="col-md-3">{item.name}</div>
+            <div className="col-md-3">{item.type}</div>
+            <div className="col-md-3">${item.cost}</div>
+            <div className="col-md-3">{item.status}</div>
           </div>
 
           {@renderInfoSection(item)}

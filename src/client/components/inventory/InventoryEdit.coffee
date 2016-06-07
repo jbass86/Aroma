@@ -1,18 +1,28 @@
 # Author: Josh Bass
 
+mathjs = require("mathjs");
 React = require("react");
-DatePicker = require("react-datepicker")
+DatePicker = require("react-datepicker");
 Moment = require("moment");
 
 module.exports = React.createClass
 
   getInitialState: ->
-    {name: "", type: "", acquire_location: "", acquire_date: Moment(),   cost: "0.00", receipt_image: "", \
-     receipt_files: undefined, item_image: "", item_image_files: undefined, item_alert: "", item_success: false};
+    @default_state = {_id: undefined, name: "", type: "", acquire_location: "", acquire_date: Moment(), cost: "0.00", receipt_image: "", \
+     receipt_files: undefined, item_image: "", item_image_files: undefined, item_alert: "", item_success: false, update_from_props: true};
 
-  componentDidMount: ->
+  componentDidUpdate: ->
+    if (@props.initialState and @state.update_from_props)
+      name = if @props.initialState.name then @props.initialState.name else @default_state.name;
+      type = if @props.initialState.type then @props.initialState.type else @default_state.type;
+      acquire_location = if @props.initialState.acquire_location then @props.initialState.acquire_location else @default_state.acquire_location;
+      acquire_date = if @props.initialState.acquire_date then @props.initialState.acquire_date else @default_state.acquire_date;
+      cost = if @props.initialState.cost then @props.initialState.cost else @default_state.cost;
+      @setState({_id: @props.initialState._id, name: name, type: type, acquire_location: acquire_location, \
+      acquire_date: acquire_date, cost: cost, update_from_props: false});
 
   render: ->
+
     <div className="add-inventory">
 
       {@createInputField("name", "Name:", "text")}
@@ -36,7 +46,7 @@ module.exports = React.createClass
 
       <div className="row inventory-create-buttons">
         <button className="col-md-6 btn btn-success" onClick={@handleCreateItem}>Create Item</button>
-        <button className="col-md-6 btn btn-danger" onClick={@handleClose}>Cancel</button>
+        <button className="col-md-6 btn btn-danger" onClick={@handleCancel}>Cancel</button>
       </div>
     </div>
 
@@ -114,8 +124,15 @@ module.exports = React.createClass
       success: (data) =>
         response = JSON.parse(data);
         @setState({item_alert: response.message, item_success: response.success});
-        @props.inventoryUpdate();
+        @props.updateInventory();
         window.setTimeout(() =>
+          window.setTimeout(() =>
+            @setState(@default_state)
+          , 1000);
           @props.handleFinish();
         , 2000);
     });
+
+  handleCancel: () ->
+    @setState(@default_state);
+    @props.handleFinish();

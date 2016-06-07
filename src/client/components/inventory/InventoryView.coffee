@@ -24,9 +24,7 @@ module.exports = React.createClass
       <div className="section-title">
         Inventory
       </div>
-
       <CreateInventory inventoryUpdate={@updateInventory}/>
-
       <InventoryTable inventoryUpdate={@updateInventory} items={@state.inventory_items} />
     </div>
 
