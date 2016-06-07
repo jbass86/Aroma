@@ -24,8 +24,9 @@ module.exports = class InventoryRoute {
       acquire_date: req.body.acquire_date,
       acquire_location: req.body.acquire_location,
       cost: req.body.cost,
-      receipt: req.body.receipt_name,
-      status: "new"
+      receipt_name: req.body.receipt_name,
+      item_name: req.body.item_name,
+      status: req.body.status ? req.body.status : "new"
     };
 
     if (req.files){
@@ -84,33 +85,28 @@ module.exports = class InventoryRoute {
     var collection = db.collection(token.group + ".inventory");
     var image_collection = db.collection(token.group + ".inventory.images");
 
-    var delete_filter = {$or: []};
-    var image_delete_filter = {$or: []};
+    var delete_filter = {_id: {$in: []}};
+    var image_delete_filter = {_id: {$in: []}};
 
     var delete_items = req.body.items_to_delete;
     delete_items.forEach((item) => {
-      delete_filter.$or.push({_id: ObjectId(item._id)});
+      delete_filter._id.$in.push(ObjectId(item._id));
       if (item.receipt_image_ref){
-        image_delete_filter.$or.push({_id: ObjectId(item.receipt_image_ref)});
+        image_delete_filter._id.$in.push(item.receipt_image_ref);
       }
       if (item.item_image_ref){
-        image_delete_filter.$or.push({_id: ObjectId(item.item_image_ref)});
+        image_delete_filter._id.$in.push(item.item_image_ref);
       }
     });
 
-    console.log("my delete filters...")
-    console.log(delete_filter);
-    console.log(image_delete_filter);
     var promise = collection.deleteMany(delete_filter);
     image_collection.deleteMany(image_delete_filter);
 
     promise.then((arg) => {
-      console.log("got the promise");
-      console.log(arg);
       if (arg.result.ok){
         res.send({success: true});
       }else{
-        res.send({success: true});
+        res.send({success: false});
       }
     });
   }

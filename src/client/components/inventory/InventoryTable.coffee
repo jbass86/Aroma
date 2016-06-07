@@ -10,7 +10,8 @@ ObjectCache = require("utilities/ObjectCache.coffee");
 module.exports = React.createClass
 
   getInitialState: ->
-    {expanded_rows: {}, image_cache: {}, editing_item: undefined, confirming_delete: {}};
+    @image_cache = new ObjectCache();
+    {expanded_rows: {}, editing_item: undefined, confirming_delete: {}};
 
   componentDidMount: ->
 
@@ -98,7 +99,13 @@ module.exports = React.createClass
               <td>{item.status}</td>
             </tr>
             <tr >
-              <td>Receipt:</td>
+              <td>Item Image:</td>
+              <td>
+                <img src={@getItemImage(item)} alt="No Image Available" width="250" height="250"></img>
+              </td>
+            </tr>
+            <tr >
+              <td>Receipt Image:</td>
               <td>
                 <img src={@getReceiptImage(item)} alt="No Image Available" width="250" height="250"></img>
               </td>
@@ -111,20 +118,23 @@ module.exports = React.createClass
   expandRow: (item) ->
     if(@state.expanded_rows[item._id])
       delete @state.expanded_rows[item._id]
-      if (item.image_ref and @state.image_cache[item.image_ref])
-        window.setTimeout(() =>
-          delete @state.image_cache[item.image_ref];
-          @setState({image_cache: @state.image_cache});
-        , 2000);
     else
       @state.expanded_rows[item._id] = item;
-      if (item.image_ref)
-        $.get("aroma/secure/get_inventory_image", {token: window.sessionStorage.token, image_ref: item.image_ref}, (response) =>
-          if (response.success)
-            @state.image_cache[item.image_ref] = "data:" + response.image.mimetype + ";base64," + response.image.buffer;
-            @setState({image_cache: @state.image_cache});
-        );
-    @setState({expanded_rows: @state.expanded_rows, image_cache: @state.image_cache});
+      if (item.receipt_image_ref)
+        if (!@image_cache.get(item.receipt_image_ref))
+          $.get("aroma/secure/get_inventory_image", {token: window.sessionStorage.token, image_ref: item.receipt_image_ref}, (response) =>
+            if (response.success)
+              @image_cache.put(item.receipt_image_ref, "data:" + response.image.mimetype + ";base64," + response.image.buffer);
+              @setState({expanded_rows: @state.expanded_rows});
+          );
+      if (item.item_image_ref)
+        if (!@image_cache.get(item.item_image_ref))
+          $.get("aroma/secure/get_inventory_image", {token: window.sessionStorage.token, image_ref: item.item_image_ref}, (response) =>
+            if (response.success)
+              @image_cache.put(item.item_image_ref, "data:" + response.image.mimetype + ";base64," + response.image.buffer);
+              @setState({expanded_rows: @state.expanded_rows});
+          );
+    @setState({expanded_rows: @state.expanded_rows});
 
   confirmDelete: (item) ->
     if(@state.confirming_delete[item._id])
@@ -144,8 +154,14 @@ module.exports = React.createClass
     @confirmDelete(item);
 
   getReceiptImage: (item) ->
-    if (@state.image_cache[item.image_ref])
-      @state.image_cache[item.image_ref];
+    if (@image_cache.get(item.receipt_image_ref))
+      @image_cache.get(item.receipt_image_ref);
+    else
+      "/no_image";
+
+  getItemImage: (item) ->
+    if (@image_cache.get(item.item_image_ref))
+      @image_cache.get(item.item_image_ref);
     else
       "/no_image";
 

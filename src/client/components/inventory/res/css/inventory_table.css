@@ -1,4 +1,8 @@
 
+.inventory-view .inventory-row{
+  font-size: 150%;
+}
+
 .inventory-table-entry{
 
   border: 1px solid white;
@@ -57,6 +61,11 @@
 
 @media only screen
 and (max-device-width: 768px){
+
+  .inventory-view .inventory-row{
+    font-size: 100%;
+  }
+
   .inventory-info-section{
     width: 90%;
   }

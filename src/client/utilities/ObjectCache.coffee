@@ -5,6 +5,7 @@ module.exports = class ObjectCache
 
   constructor: (options) ->
 
+    options = if options then options else {};
     @max_size = if options.max_size then options.max_size else 50;
     @cull_time = if options.cull_time then options.cull_time else 5000;
 
@@ -21,7 +22,10 @@ module.exports = class ObjectCache
     , 5000);
 
   get: (attr) ->
-    @cache[attr];
+    if (@cache[attr])
+      @cache[attr].object;
+    else
+      undefined;
 
   put: (attr, object) ->
 

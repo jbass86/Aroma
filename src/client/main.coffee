@@ -8,7 +8,6 @@ React = require("react");
 ReactDOM = require("react-dom");
 css = require ("css/main.css");
 
-
 HeaderBar = require("components/header_bar/HeaderBarView.coffee");
 NavigationBar = require("components/navigation_bar/NavigationBarview.coffee");
 LoginView = require("components/login/LoginView.coffee");
