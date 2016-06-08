@@ -34,8 +34,6 @@ module.exports = React.createClass
     </div>
 
   getNavSelectionClasses: (name) ->
-    console.log("get nav selections");
-    console.log(name);
     classes = "nav-selection label";
     if (@state.nav_selection.includes(name))
       classes += " label-success";
@@ -55,5 +53,3 @@ module.exports = React.createClass
       @props.nav_model.set("nav_selection", selections);
       @props.nav_model.trigger("change:nav_selection", selections);
     );
-
-    console.log(selections)

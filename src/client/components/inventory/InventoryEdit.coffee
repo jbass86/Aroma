@@ -9,17 +9,31 @@ module.exports = React.createClass
 
   getInitialState: ->
     @default_state = {_id: undefined, name: "", type: "", acquire_location: "", acquire_date: Moment(), cost: "0.00", receipt_image: "", \
-     receipt_files: undefined, item_image: "", item_image_files: undefined, item_alert: "", item_success: false, update_from_props: true};
+     receipt_files: undefined, item_image: "", item_image_files: undefined, item_alert: "", item_success: false, update_from_props: true, \
+     receipt_image_ref: undefined, item_image_ref: undefined};
+
+  componentDidMount: ->
+    @checkInitialState();
+
+  componentWillUnmount: ->
+    if (@reset_default_timeout)
+      window.clearTimeout(@reset_default_timeout);
+      @reset_default_timeout = undefined;
 
   componentDidUpdate: ->
+    @checkInitialState();
+
+  checkInitialState: ->
     if (@props.initialState and @state.update_from_props)
       name = if @props.initialState.name then @props.initialState.name else @default_state.name;
       type = if @props.initialState.type then @props.initialState.type else @default_state.type;
       acquire_location = if @props.initialState.acquire_location then @props.initialState.acquire_location else @default_state.acquire_location;
       acquire_date = if @props.initialState.acquire_date then @props.initialState.acquire_date else @default_state.acquire_date;
       cost = if @props.initialState.cost then @props.initialState.cost else @default_state.cost;
+      receipt_image_ref = if @props.initialState.receipt_image_ref then @props.initialState.receipt_image_ref else @default_state.receipt_image_ref;
+      item_image_ref = if @props.initialState.item_image_ref then @props.initialState.item_image_ref else @default_state.item_image_ref;
       @setState({_id: @props.initialState._id, name: name, type: type, acquire_location: acquire_location, \
-      acquire_date: acquire_date, cost: cost, update_from_props: false});
+      acquire_date: acquire_date, cost: cost, update_from_props: false, receipt_image_ref: receipt_image_ref, item_image_ref: item_image_ref});
 
   render: ->
 
@@ -97,6 +111,8 @@ module.exports = React.createClass
 
     form = new FormData();
     form.append("token", window.sessionStorage.token);
+    if (@state._id)
+      form.append("_id", @state._id);
     form.append("name", @state.name);
     form.append("type", @state.type);
     form.append("acquire_location", @state.acquire_location);
@@ -104,11 +120,14 @@ module.exports = React.createClass
     form.append("cost", @state.cost);
     form.append("receipt_name", @state.receipt_image);
     form.append("item_name", @state.item_image);
+    form.append("item_image_ref", @state.item_image_ref);
+    form.append("receipt_image_ref", @state.receipt_image_ref);
+
+    if (@state.item_image)
+      form.append("item_image_file", @state.item_image_files[0]);
 
     if (@state.receipt_image)
       form.append("receipt_image_file", @state.receipt_files[0]);
-    if (@state.item_image)
-      form.append("item_image_file", @state.item_image_files[0]);
 
     $.ajax({
       url: 'aroma/secure/update_inventory',
@@ -124,10 +143,11 @@ module.exports = React.createClass
       success: (data) =>
         response = JSON.parse(data);
         @setState({item_alert: response.message, item_success: response.success});
-        @props.updateInventory();
+        @props.updateInventory(@state._id);
         window.setTimeout(() =>
-          window.setTimeout(() =>
-            @setState(@default_state)
+          @reset_default_timeout = window.setTimeout(() =>  
+            @reset_default_timeout = undefined;
+            @setState(@default_state);
           , 1000);
           @props.handleFinish();
         , 2000);

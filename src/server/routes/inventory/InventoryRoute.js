@@ -17,8 +17,10 @@ module.exports = class InventoryRoute {
     var collection = db.collection(token.group + ".inventory");
     var image_collection = db.collection(token.group + ".inventory.images");
 
+    var is_update = req.body._id ? true : false;
+
     var item = {
-      _id: req.body.db_id ? req.body.db_id : undefined,
+      _id: req.body._id ? ObjectId(req.body._id) : undefined,
       name: req.body.name,
       type: req.body.type,
       acquire_date: req.body.acquire_date,
@@ -26,21 +28,25 @@ module.exports = class InventoryRoute {
       cost: req.body.cost,
       receipt_name: req.body.receipt_name,
       item_name: req.body.item_name,
+      receipt_image_ref: req.body.receipt_image_ref,
+      item_image_ref: req.body.item_image_ref,
       status: req.body.status ? req.body.status : "new"
     };
 
     if (req.files){
       for(var i = 0; i < req.files.length; i++){
         if (req.files[i].fieldname == "receipt_image_file"){
-          if (!item.receipt_image_ref){
-            item.receipt_image_ref = uuid.v4();
+          if (item.receipt_image_ref){
+            image_collection.deleteOne({_id: item.receipt_image_ref});
           }
+          item.receipt_image_ref = uuid.v4();
           req.files[i]._id = item.receipt_image_ref;
           image_collection.update({_id: req.files[i]._id}, req.files[i], {upsert: true});
         }else if (req.files[i].fieldname == "item_image_file"){
-          if (!item.item_image_ref){
-            item.item_image_ref = uuid.v4();
+          if (item.item_image_ref){
+            image_collection.deleteOne({_id: item.item_image_ref});
           }
+          item.item_image_ref = uuid.v4();
           req.files[i]._id = item.item_image_ref;
           image_collection.update({_id: req.files[i]._id}, req.files[i], {upsert: true});
         }
@@ -51,13 +57,15 @@ module.exports = class InventoryRoute {
       if (err){
         res.send({sucess: false, message: "Error Creating Item"});
       }else{
-        res.send({success: true, message: "Item Created Sucessfully"});
+        var message = is_update ? "Item Updated Successfully" : "Item Created Sucessfully";
+        res.send({success: true, message: message});
       }
     }
 
     if (item._id){
       collection.update({_id: item._id}, item, {upsert: true}, cb);
     }else{
+      console.log("insert item");
       collection.insert(item, cb);
     }
   }
@@ -76,8 +84,6 @@ module.exports = class InventoryRoute {
   }
 
   httpDeleteItems(req, res){
-
-    console.log("got into the delete route...");
 
     var db = this.db_coord.getDatabaseInstance();
     var token = req.decoded;

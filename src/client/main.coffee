@@ -32,19 +32,6 @@ $(() ->
     getInitialState: () ->
       {authenticated: nav_model.get("authenticated"), remove_login: nav_model.get("remove_login")};
 
-    componentDidMount: () ->
-      console.log("mounted main comp");
-
-      # window.setTimeout(()=>
-      #   console.log("get an image");
-      #   $.get("aroma/secure/get_inventory_image", {token: window.sessionStorage.token}, (response) =>
-      #
-      #     console.log("got the response back!!!");
-      #     console.log(response);
-      #     @setState({"img_url": "data:" + response.mimetype + ";base64," + response.buffer});
-      #   );
-      # , 5000);
-
     render: () ->
       <div>
         <div className={@getLoginClasses()}>
@@ -83,7 +70,6 @@ $(() ->
         <div style={{"width": "100vw", "height": "100vh"}}></div>
 
     getLoginClasses: () ->
-      console.log("get login classes!");
       classes = "";
       if (@state.authenticated)
         classes += " fade-out";
@@ -110,8 +96,6 @@ $(() ->
   if (window.sessionStorage.token)
     $.post("aroma/secure/authenticate_token", {token: window.sessionStorage.token}, (response) =>
       window.user_info = {username: response.username, group: response.group};
-      console.log("user info!!!");
-      console.log(window.user_info);
       nav_model.set("authenticated", response.success);
       nav_model.set("remove_login", response.success);
       ReactDOM.render(React.createElement(comp, null), $("#react-body").get(0));

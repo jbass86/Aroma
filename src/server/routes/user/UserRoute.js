@@ -29,13 +29,11 @@ module.exports = class UserRoute {
               password: bcrypt.hashSync(req.body.password),
               email: req.body.email,
               group: (req.body.group) ? req.body.group : "default"};
-            console.log("Creating a user");
-            console.log(user);
+
             collection.insert(user, {w:1}, (err, result) => {
               if (err){
                 res.send({sucess: false, message: "Error Creating User"});
               }else{
-                console.log("it was a success!!!");
                 res.send({success: true, message: "User Created Sucessfully"});
               }
             });

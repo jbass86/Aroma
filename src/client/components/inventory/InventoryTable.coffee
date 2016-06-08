@@ -8,8 +8,6 @@ Moment = require("moment");
 
 ObjectCache = require("utilities/ObjectCache.coffee");
 
-#<InventoryEdit initialState={name: item.name, type: item.type, acquire_date: Moment(new Date(item.acquire_date))}/>
-
 module.exports = React.createClass
 
   getInitialState: ->
@@ -42,6 +40,8 @@ module.exports = React.createClass
 
     info_classes = "collapsible";
     if (@state.expanded_rows[item._id])
+      #make sure expanded row state has the most up to date item.
+      @state.expanded_rows[item._id] = item;
       info_classes += " full-height-medium";
     else
       info_classes += " no-height";
@@ -55,7 +55,7 @@ module.exports = React.createClass
     <div className={info_classes}>
 
       <div className="row item-edit-buttons">
-        <button className="col-xs-6 btn btn-info">
+        <button className="col-xs-6 btn btn-info" onClick={@editItem.bind(@, item)}>
           <span className="glyphicon glyphicon-edit"></span>
         </button>
         <button className="col-xs-6 btn btn-danger" onClick={@confirmDelete.bind(@, item)}>
@@ -72,10 +72,17 @@ module.exports = React.createClass
            </div>
         </div>
       </div>
+      {@renderDetailedInfo(item)}
+    </div>
 
+  renderDetailedInfo: (item) ->
 
+    if (@state.editing_item == item._id)
+      initial_state = {_id: item._id, name: item.name, type: item.type, acquire_date: Moment(new Date(item.acquire_date)), \
+        acquire_location: item.acquire_location, cost: item.cost, receipt_image_ref: item.receipt_image_ref, item_image_ref: item.item_image_ref};
+      <InventoryEdit initialState={initial_state} updateInventory={@finishEdit} handleFinish={@cancelEdit}/>
+    else
       <div className="inventory-info-section">
-
         <table>
           <tbody>
             <tr>
@@ -117,13 +124,19 @@ module.exports = React.createClass
           </tbody>
         </table>
       </div>
-    </div>
+
 
   expandRow: (item) ->
     if(@state.expanded_rows[item._id])
       delete @state.expanded_rows[item._id]
     else
       @state.expanded_rows[item._id] = item;
+      @handleImageFetch(item);
+
+    @setState({expanded_rows: @state.expanded_rows});
+
+  handleImageFetch: (item) ->
+    if (item)
       if (item.receipt_image_ref)
         if (!@image_cache.get(item.receipt_image_ref))
           $.get("aroma/secure/get_inventory_image", {token: window.sessionStorage.token, image_ref: item.receipt_image_ref}, (response) =>
@@ -138,7 +151,7 @@ module.exports = React.createClass
               @image_cache.put(item.item_image_ref, "data:" + response.image.mimetype + ";base64," + response.image.buffer);
               @setState({expanded_rows: @state.expanded_rows});
           );
-    @setState({expanded_rows: @state.expanded_rows});
+
 
   confirmDelete: (item) ->
     if(@state.confirming_delete[item._id])
@@ -148,14 +161,26 @@ module.exports = React.createClass
     @setState({confirming_delete: @state.confirming_delete})
 
   deleteItem: (item) ->
-    console.log("here we need to delete the item...");
     $.post("aroma/secure/delete_inventory", {token: window.sessionStorage.token, items_to_delete: [item]}, (response) =>
       if (response.success)
         console.log("it worked....");
         @props.inventoryUpdate();
     )
-
     @confirmDelete(item);
+
+  editItem: (item) ->
+    @setState({editing_item: item._id});
+
+  finishEdit: (id) ->
+    @props.inventoryUpdate();
+
+    #its possible this edit has new images so check everything in a second.
+    window.setTimeout(() =>
+      @handleImageFetch(@state.expanded_rows[id]);
+    , 1000);
+
+  cancelEdit: () ->
+    @setState({editing_item: undefined});
 
   getReceiptImage: (item) ->
     if (@image_cache.get(item.receipt_image_ref))
