@@ -26,6 +26,7 @@ module.exports = class InventoryRoute {
       acquire_date: req.body.acquire_date,
       acquire_location: req.body.acquire_location,
       cost: req.body.cost,
+      sale_price: req.body.sale_price,
       receipt_name: req.body.receipt_name,
       item_name: req.body.item_name,
       receipt_image_ref: req.body.receipt_image_ref,

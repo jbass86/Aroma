@@ -7,6 +7,7 @@ InventoryEdit = require("./InventoryEdit.coffee");
 Moment = require("moment");
 
 ObjectCache = require("utilities/ObjectCache.coffee");
+DateUtils = require("utilities/DateUtils.coffee");
 
 module.exports = React.createClass
 
@@ -99,11 +100,19 @@ module.exports = React.createClass
             </tr>
             <tr >
               <td>Acquire Date:</td>
-              <td>{item.acquire_date}</td>
+              <td>{DateUtils.getPrettyDate(item.acquire_date)}</td>
             </tr>
             <tr>
               <td>Acquire Location:</td>
               <td>{item.acquire_location}</td>
+            </tr>
+            <tr>
+              <td>Cost:</td>
+              <td>${item.cost}</td>
+            </tr>
+            <tr>
+              <td>Sale Price:</td>
+              <td>${item.sale_price}</td>
             </tr>
             <tr>
               <td>Status:</td>
@@ -124,7 +133,6 @@ module.exports = React.createClass
           </tbody>
         </table>
       </div>
-
 
   expandRow: (item) ->
     if(@state.expanded_rows[item._id])
@@ -193,6 +201,3 @@ module.exports = React.createClass
       @image_cache.get(item.item_image_ref);
     else
       "/no_image";
-
-  getInfoSectionClasses: () ->
-    console.log("do some stuff...");

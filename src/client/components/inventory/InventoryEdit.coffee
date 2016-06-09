@@ -8,7 +8,7 @@ Moment = require("moment");
 module.exports = React.createClass
 
   getInitialState: ->
-    @default_state = {_id: undefined, name: "", type: "", acquire_location: "", acquire_date: Moment(), cost: "0.00", receipt_image: "", \
+    @default_state = {_id: undefined, name: "", type: "", acquire_location: "", acquire_date: Moment(), cost: "0.00", sale_price: "0.00", receipt_image: "", \
      receipt_files: undefined, item_image: "", item_image_files: undefined, item_alert: "", item_success: false, update_from_props: true, \
      receipt_image_ref: undefined, item_image_ref: undefined};
 
@@ -30,6 +30,7 @@ module.exports = React.createClass
       acquire_location = if @props.initialState.acquire_location then @props.initialState.acquire_location else @default_state.acquire_location;
       acquire_date = if @props.initialState.acquire_date then @props.initialState.acquire_date else @default_state.acquire_date;
       cost = if @props.initialState.cost then @props.initialState.cost else @default_state.cost;
+      sale_price = if @props.initialState.sale_price then @props.initialState.sale_price else @default_state.sale_price;
       receipt_image_ref = if @props.initialState.receipt_image_ref then @props.initialState.receipt_image_ref else @default_state.receipt_image_ref;
       item_image_ref = if @props.initialState.item_image_ref then @props.initialState.item_image_ref else @default_state.item_image_ref;
       @setState({_id: @props.initialState._id, name: name, type: type, acquire_location: acquire_location, \
@@ -53,16 +54,23 @@ module.exports = React.createClass
 
       {@createInputField("acquire_location", "Acquire Location:", "text")}
       {@createInputField("cost", "Cost:", "number")}
+      {@createInputField("sale_price", "Sale Price:", "number")}
       {@createInputField("item_image", "Item Image:", "file")}
       {@createInputField("receipt_image", "Receipt:", "file")}
 
       {@getCreateItemAlert()}
 
       <div className="row inventory-create-buttons">
-        <button className="col-md-6 btn btn-success" onClick={@handleCreateItem}>Create Item</button>
+        <button className="col-md-6 btn btn-success" onClick={@handleCreateItem}>{@getCreateButtonText()}</button>
         <button className="col-md-6 btn btn-danger" onClick={@handleCancel}>Cancel</button>
       </div>
     </div>
+
+  getCreateButtonText: () ->
+    if (@state._id)
+      "Update Item"
+    else
+      "Create Item"
 
   getCreateItemAlert: () ->
     success = if (@state.item_success) then " alert-success" else " alert-danger";
@@ -81,12 +89,25 @@ module.exports = React.createClass
 
     input_class = if (type == "file") then "inventory-file-input" else "inventory-input-field";
 
+    inputCreate = () =>
+      if (type == "file")
+        <div>
+          <label style={{"float": "left"}} className="btn btn-primary">
+            Select File <input type="file" style={{"display": "none"}} accept="image/*" onChange={(event)=>@handleFieldUpdate(name, event)} />
+          </label>
+          <input type="text" className="form-control inventory-input-field" style={{"float": "left", "width": "70%"}} value={@state[name]} readOnly="true" />
+        </div>
+      else
+        <div>
+          <input type={type} className={input_class} value={@state[name]} onChange={(event)=>@handleFieldUpdate(name, event)} />
+        </div>
+
     <div className="row inventory-create-row">
       <div className="col-md-4">
         {display_name}
       </div>
       <div className="col-md-8">
-        <input type={type} className={input_class} accept="image/*" value={@state[name]} onChange={(event)=>@handleFieldUpdate(name, event)} />
+        {inputCreate()}
       </div>
     </div>
 
@@ -96,6 +117,8 @@ module.exports = React.createClass
     if (event.target.type == "number")
       value = mathjs.round(value, 2);
     if (event.target.type == "file")
+      paths = value.split("\\");
+      value = paths[paths.length - 1];
       if (field_name == "receipt_image")
         update.receipt_files = event.target.files;
       else if (field_name == "item_image")
@@ -118,6 +141,7 @@ module.exports = React.createClass
     form.append("acquire_location", @state.acquire_location);
     form.append("acquire_date", @state.acquire_date.toDate());
     form.append("cost", @state.cost);
+    form.append("sale_price", @state.sale_price);
     form.append("receipt_name", @state.receipt_image);
     form.append("item_name", @state.item_image);
     form.append("item_image_ref", @state.item_image_ref);
@@ -145,7 +169,7 @@ module.exports = React.createClass
         @setState({item_alert: response.message, item_success: response.success});
         @props.updateInventory(@state._id);
         window.setTimeout(() =>
-          @reset_default_timeout = window.setTimeout(() =>  
+          @reset_default_timeout = window.setTimeout(() =>
             @reset_default_timeout = undefined;
             @setState(@default_state);
           , 1000);
