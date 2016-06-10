@@ -4,6 +4,7 @@ var gulp = require("gulp");
 var del = require("del");
 var browserify = require("browserify");
 var browserify_css = require("browserify-css");
+var sassify = require("sassify");
 var watchify = require("watchify");
 var source = require("vinyl-source-stream");
 var path = require("path");
@@ -19,6 +20,7 @@ var browserify_client = function(debug){
       "reactify",
       ["coffee-reactify", {"coffeeout": true}],
       "coffeeify",
+      ["sassify", {"auto-inject": true}],
       "cssify",
       ["browserify-css", {"global": true}],
       ["reactify", {"es6": true, "everything": true}]

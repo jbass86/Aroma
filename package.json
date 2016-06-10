@@ -30,6 +30,7 @@
     "del": "^2.2.0",
     "gulp": "^3.9.1",
     "reactify": "^1.1.1",
+    "sassify": "^1.0.0",
     "uglifyify": "^3.0.1",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"

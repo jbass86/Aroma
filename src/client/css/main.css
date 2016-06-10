@@ -1,11 +1,11 @@
 /*Author: Josh Bass*/
 /*Description: This sheet contains some base styles mostly used by the components laid out in main.js*/
 
-@import "../../../node_modules/bootstrap/dist/css/bootstrap.css";
-@import('../../../node_modules/react-datepicker/dist/react-datepicker.css');
+@import url("../../../node_modules/bootstrap/dist/css/bootstrap.css");
+@import url('../../../node_modules/react-datepicker/dist/react-datepicker.css');
 
-@import "./global.css";
-@import "./common-styles.css";
+@import url("./global.css");
+@import url("./common-styles.css");
 
 body {
 
