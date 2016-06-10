@@ -17,13 +17,12 @@ var browserify_client = function(debug){
     entries: ["./src/client/main.coffee"],
     paths: ["./node_modules", "./src/client", "./src"],
     transform: [
-      "reactify",
       ["coffee-reactify", {"coffeeout": true}],
       "coffeeify",
+      ["reactify", {"es6": true}],
       ["sassify", {"auto-inject": true}],
       "cssify",
-      ["browserify-css", {"global": true}],
-      ["reactify", {"es6": true, "everything": true}]
+      ["browserify-css", {"global": true}]
     ],
     debug: debug})
   .transform(browserify_css, {
