@@ -121,13 +121,13 @@ module.exports = React.createClass
             <tr >
               <td>Item Image:</td>
               <td>
-                <img src={@getItemImage(item)} alt="No Image Available" width="250" height="250"></img>
+                <img src={@getItemImage(item)} alt="No Image Available" height="250"></img>
               </td>
             </tr>
             <tr >
               <td>Receipt Image:</td>
               <td>
-                <img src={@getReceiptImage(item)} alt="No Image Available" width="250" height="250"></img>
+                <img src={@getReceiptImage(item)} alt="No Image Available" height="250"></img>
               </td>
             </tr>
           </tbody>

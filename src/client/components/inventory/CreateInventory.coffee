@@ -10,8 +10,10 @@ css = require("./res/css/create_inventory.css");
 module.exports = React.createClass
 
   getInitialState: ->
+
     @default_state = {show_create_inventory: false, name: "", type: "", acquire_location: "", acquire_date: Moment(), \
-      cost: "0.00", receipt: "", receipt_files: undefined, item_image: "", item_image_files: undefined, item_alert: "", item_success: false};
+      cost: "0.00", receipt: "", receipt_files: undefined, item_image: "", item_image_files: undefined, item_alert: "", \
+      item_success: false};
 
   componentDidMount: ->
 
