@@ -11,7 +11,6 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
 
   top: 50px;
-
   left: 0px;
   z-index: 3;
 
@@ -19,38 +18,37 @@
 
   border: 1px solid black;
   border-radius: 3px;
+
+  .nav-header{
+    color: white;
+    text-align: center;
+    padding-bottom: 40px;
+
+    min-width: 220px;
+  }
+
+  .nav-selection{
+    display: block;
+
+    width: 75%;
+    min-width: 220px;
+
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    font-size: 1.1em;
+
+    padding: 15px;
+
+    border: 2px solid rgba(0, 0, 0, 0);
+
+    &:hover{
+      border: 2px solid orange;
+    }
+  }
 }
 
-
-.nav-header{
-  color: white;
-  text-align: center;
-  padding-bottom: 40px;
-
-  min-width: 220px;
-}
-
-
-.nav-selection{
-  display: block;
-
-  width: 75%;
-  min-width: 220px;
-
-  margin: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-
-  font-size: 1.1em;
-
-  padding: 15px;
-
-  border: 2px solid rgba(0, 0, 0, 0);
-}
-
-.nav-selection:hover{
-  border: 2px solid orange;
-}
 
 @media only screen
 and (max-device-width: 768px)

@@ -1,6 +1,6 @@
 /*Author: Josh Bass*/
 /*Description: Style information for the mast diagnostic header bar which sits atop the display*/
-.header-bar{
+.header-bar {
 
   background: #45484d; /* Old browsers */
   background: -moz-linear-gradient(top,  #45484d 0%, #000000 100%); /* FF3.6+ */
@@ -14,48 +14,51 @@
   border-radius: 4px;
   height: 100%;
   color: white;
-}
 
-.header-bar .menu-glyph {
+  .menu-glyph {
 
-  margin-top: 8px;
-  padding: 5px;
-  font-size: 150%;
-  border-radius: 5px;
-  color: white;
-}
+    margin-top: 8px;
+    padding: 5px;
+    font-size: 150%;
+    border-radius: 5px;
+    color: white;
 
-.header-bar .menu-glyph:hover{
-  background: orange;
-  color: black;
-}
+    &:hover {
+      background: orange;
+      color: black;
+    }
+  }
 
-.header-bar .nav-button{
-  margin-left: 25px;
-}
+  .nav-button {
+    margin-left: 25px;
+  }
 
-.header-bar .user-name {
-  position: absolute;
-  padding: 10px;
-  right: calc(1% + 30px);
-  font-size: 150%;
-}
+  .user-name {
+    position: absolute;
+    padding: 10px;
+    right: calc(1% + 30px);
+    font-size: 150%;
+  }
 
-.header-bar .logout-button {
-  position: absolute;
-  right: 1%;
+  .logout-button {
+    position: absolute;
+    right: 1%;
+  }
 }
 
 @media only screen
 and (max-device-width: 768px)
 and (orientation: portrait) {
 
-  .header-bar .user-name {
-    display: none;
-  }
+  .header-bar {
 
-  .header-bar .menu-glyph {
-    margin-top: 30px;
-    font-size: 500%;
+    .user-name {
+      display: none;
+    }
+
+    .menu-glyph {
+      margin-top: 30px;
+      font-size: 500%;
+    }
   }
 }

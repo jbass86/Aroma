@@ -1,4 +1,6 @@
 
+@import "../../../../styles/colors.scss";
+
 .create-inventory{
 
   .inventory-mod-button {
@@ -14,11 +16,12 @@
 
 .add-inventory {
 
-  border: 1px solid white;
+  border: 1px solid $color-primary-1;
   border-radius: 2px;
 
   width: 50%;
   margin: auto;
+  margin-bottom: 10px;
 
   .inventory-create-row{
     margin: 10px;

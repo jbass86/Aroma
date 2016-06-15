@@ -201,4 +201,3 @@ module.exports = React.createClass
       @image_cache.get(item.item_image_ref);
     else
       "/no_image";
-      

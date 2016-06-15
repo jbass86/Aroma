@@ -1,7 +1,7 @@
 # Author: Josh Bass
 
 React = require("react");
-css = require("./res/css/navigation_bar.css");
+require("./res/styles/navigation_bar.scss");
 
 module.exports = React.createClass
 

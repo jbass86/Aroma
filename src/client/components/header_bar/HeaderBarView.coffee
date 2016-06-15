@@ -3,7 +3,7 @@
 React = require("react");
 mathjs = require("mathjs");
 
-css = require("./res/css/header_bar.css")
+require("./res/styles/header_bar.scss")
 
 module.exports = React.createClass
 

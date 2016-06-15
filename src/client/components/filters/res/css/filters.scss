@@ -1,0 +1,59 @@
+
+@import "../../../../styles/colors.scss";
+
+$mobile-breakpoint: 768px;
+
+.filters-view{
+
+  .add-filter-button{
+    margin: 5px;
+    float: right;
+  }
+
+  .filters-list{
+
+    border: 1px solid $color-primary-4;
+    margin-left: 10px;
+    margin-right: 10px;
+
+    legend {
+      width: auto;
+      display: block;
+      margin-left: 10px;
+      margin-bottom: 0;
+      padding-left: 2px;
+      padding-right: 5px;
+      border: none;
+      color: $color-primary-4;
+
+
+      .glyphicon {
+        font-size: 65%;
+      }
+
+      &:hover{
+        border-radius: 5px;
+        background: $color-complement-0;
+        color: $main-text-dark;
+      }
+    }
+
+    .filter {
+      margin: 5px 10px;
+    }
+
+  }
+}
+
+@media only screen
+and (max-device-width: $mobile-breakpoint) {
+  .filters-view {
+
+    .add-filter-button{
+
+      button {
+        font-size: 115%;
+      }
+    }
+  }
+}

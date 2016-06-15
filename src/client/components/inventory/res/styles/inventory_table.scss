@@ -12,7 +12,6 @@
     border: 2px solid $color-primary-1;
     border-radius: 5px;
     margin: 10px;
-    padding: 15px 0;
 
     &:hover{
       border: 2px solid $color-complement-0;
@@ -24,7 +23,7 @@
     background: $light-grey-background;
 
     .item-edit-buttons{
-      width: 180px;
+      width: 200px;
       padding: 10px;
       margin: auto;
 
@@ -32,6 +31,7 @@
         font-size: 140%;
         width: 80px;
         height: 60px;
+        margin: 5px;
       }
     }
 
@@ -44,7 +44,7 @@
 
     .inventory-row{
       text-align: center;
-      padding: 10px;
+      padding: 15px 0;
     }
 
     .inventory-info-section{
@@ -54,6 +54,7 @@
       width: 50%;
       text-align: center;
       margin: auto;
+      margin-bottom: 10px;
 
       table{
         width: 100%;
