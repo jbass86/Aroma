@@ -7,7 +7,7 @@ CreateInventory = require("./CreateInventory.coffee");
 Filters = require("client/components/filters/FiltersView.coffee");
 InventoryTable = require("./InventoryTable.coffee");
 
-css = require("./res/css/inventory.css")
+require("./res/styles/inventory.scss");
 
 module.exports = React.createClass
 

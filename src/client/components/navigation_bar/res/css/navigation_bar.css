@@ -44,6 +44,8 @@
   font-size: 1.1em;
 
   padding: 15px;
+
+  border: 2px solid rgba(0, 0, 0, 0);
 }
 
 .nav-selection:hover{

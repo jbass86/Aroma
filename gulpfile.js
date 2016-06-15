@@ -10,6 +10,12 @@ var source = require("vinyl-source-stream");
 var path = require("path");
 
 var browserify_client = function(debug){
+
+  var processUrl = (url) => {
+    var parsed = path.basename(url);
+    return "./assets/" + parsed;
+  };
+
   var b = browserify({
     catche: {},
     packageCache: {},
@@ -21,16 +27,9 @@ var browserify_client = function(debug){
       "coffeeify",
       ["reactify", {"es6": true}],
       ["sassify", {"auto-inject": true}],
-      "cssify",
-      ["browserify-css", {"global": true}]
+      ["browserify-css", {global: true, processRelativeUrl: processUrl}]
     ],
-    debug: debug})
-  .transform(browserify_css, {
-    processRelativeUrl: function(url){
-      var parsed = path.basename(url);
-      return "./assets/" + parsed;
-    }
-  });
+    debug: debug});
 
   if (!debug){
     b.transform({global: true}, "uglifyify");

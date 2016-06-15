@@ -21,7 +21,7 @@ module.exports = React.createClass
 
       <div className={"nav-bar-view collapsible-real" + if @state.nav_visible then " col-xs-6 col-md-4" else " no-width"}>
         <h2 className="nav-header">
-          <span>Aroma</span>
+          <span>Navigation</span>
         </h2>
 
         <div className="nav-selections unselectable">
@@ -36,7 +36,7 @@ module.exports = React.createClass
   getNavSelectionClasses: (name) ->
     classes = "nav-selection label";
     if (@state.nav_selection.includes(name))
-      classes += " label-success";
+      classes += " widget-comp-0";
     else
       classes += " label-default";
     classes;

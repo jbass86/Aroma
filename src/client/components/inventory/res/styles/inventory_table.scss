@@ -1,0 +1,110 @@
+
+@import "../../../../styles/colors.scss";
+
+.inventory-view {
+
+  .inventory-row{
+    font-size: 150%;
+  }
+
+  .inventory-table-entry{
+
+    border: 2px solid $color-primary-1;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 15px 0;
+
+    &:hover{
+      border: 2px solid $color-complement-0;
+    }
+  }
+
+  .inventory-table-entry{
+
+    background: $light-grey-background;
+
+    .item-edit-buttons{
+      width: 180px;
+      padding: 10px;
+      margin: auto;
+
+      button{
+        font-size: 140%;
+        width: 80px;
+        height: 60px;
+      }
+    }
+
+    .delete-item-alert{
+      width: 200px;
+      padding: 10px 15px;
+      margin: auto;
+      margin-bottom: 10px;
+    }
+
+    .inventory-row{
+      text-align: center;
+      padding: 10px;
+    }
+
+    .inventory-info-section{
+
+      text-align: left;
+
+      width: 50%;
+      text-align: center;
+      margin: auto;
+
+      table{
+        width: 100%;
+        text-align: center;
+        border-radius: 4px;
+
+        td{
+          border: 1px solid $color-primary-1;
+          border-radius: 4px;
+          padding: 10px 15px;
+          vertical-align: center;
+
+          img{
+            border-radius: 4px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@media only screen
+and (max-device-width: 768px){
+
+  .inventory-view{
+
+    .inventory-row{
+      font-size: 100%;
+    }
+
+    .inventory-info-section{
+      width: 90%;
+    }
+
+    .inventory-table-entry{
+
+      .item-edit-buttons{
+        button{
+         font-size: 120%;
+         height: 80px;
+       }
+      }
+
+      .delete-item-alert{
+        width: 300px;
+
+        .btn{
+          font-size: 100%;
+        }
+      }
+    }
+  }
+}

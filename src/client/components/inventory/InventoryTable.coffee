@@ -1,6 +1,7 @@
 # Author: Josh Bass
 
-css = require("./res/css/inventory_table.css");
+require("./res/styles/inventory_table.scss");
+
 
 React = require("react");
 InventoryEdit = require("./InventoryEdit.coffee");
@@ -30,7 +31,6 @@ module.exports = React.createClass
             <div className="col-md-3">${item.cost}</div>
             <div className="col-md-3">{item.status}</div>
           </div>
-
           {@renderInfoSection(item)}
 
         </div>
@@ -56,7 +56,7 @@ module.exports = React.createClass
     <div className={info_classes}>
 
       <div className="row item-edit-buttons">
-        <button className="col-xs-6 btn btn-info" onClick={@editItem.bind(@, item)}>
+        <button className="col-xs-6 btn btn-primary" onClick={@editItem.bind(@, item)}>
           <span className="glyphicon glyphicon-edit"></span>
         </button>
         <button className="col-xs-6 btn btn-danger" onClick={@confirmDelete.bind(@, item)}>
@@ -201,3 +201,4 @@ module.exports = React.createClass
       @image_cache.get(item.item_image_ref);
     else
       "/no_image";
+      

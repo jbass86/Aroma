@@ -26,7 +26,6 @@
     "browserify-css": "^0.9.1",
     "coffee-reactify": "^5.0.0",
     "coffeeify": "^2.0.1",
-    "cssify": "^1.0.2",
     "del": "^2.2.0",
     "gulp": "^3.9.1",
     "reactify": "^1.1.1",

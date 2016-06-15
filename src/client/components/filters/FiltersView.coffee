@@ -4,7 +4,7 @@ React = require("react");
 
 Moment = require("moment");
 
-css = require("./res/css/filters.scss");
+css = require("./res/styles/filters.scss");
 
 module.exports = React.createClass
 
@@ -17,7 +17,7 @@ module.exports = React.createClass
 
     <div className="filters-view">
       <div className="btn-group add-filter-button">
-        <button type="button" className="btn btn-info dropdown-toggle" data-toggle="dropdown">
+        <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown">
           Add Filter <span className="caret"></span>
         </button>
         {@renderFilterDropdown()}
@@ -45,8 +45,8 @@ module.exports = React.createClass
     else
       <div></div>
 
-  renderFilter: (filter) ->
-    <div className="filter">
+  renderFilter: (filter, index) ->
+    <div key={index} className="filter">
       {filter.name}
     </div>
 

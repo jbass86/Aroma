@@ -6,7 +6,10 @@ require('bootstrap');
 
 React = require("react");
 ReactDOM = require("react-dom");
-css = require ("css/main.css");
+#require ("css/main.css");
+require("../../node_modules/bootstrap/dist/css/bootstrap.css");
+require("../../node_modules/react-datepicker/dist/react-datepicker.css");
+require("styles/main.scss");
 
 HeaderBar = require("components/header_bar/HeaderBarView.coffee");
 NavigationBar = require("components/navigation_bar/NavigationBarview.coffee");
@@ -17,7 +20,6 @@ Inventory = require("components/inventory/InventoryView.coffee");
 Customers = require("components/customers/CustomerView.coffee");
 Orders = require("components/orders/OrderView.coffee");
 Analytics = require("components/analytics/AnalyticsView.coffee");
-
 
 Backbone = require("backbone");
 

@@ -61,7 +61,7 @@ module.exports = React.createClass
       {@getCreateItemAlert()}
 
       <div className="row inventory-create-buttons">
-        <button className="col-md-6 btn btn-success" onClick={@handleCreateItem}>{@getCreateButtonText()}</button>
+        <button className="col-md-6 btn btn-primary" onClick={@handleCreateItem}>{@getCreateButtonText()}</button>
         <button className="col-md-6 btn btn-danger" onClick={@handleCancel}>Cancel</button>
       </div>
     </div>
