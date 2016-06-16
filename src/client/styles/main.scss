@@ -18,7 +18,8 @@ body {
   // background: -webkit-linear-gradient(top,  #4c198e 0%,#3f0e84 50%,#180b23 100%); /* Chrome10-25,Safari5.1-6 */
   // background: linear-gradient(to bottom,  #4c198e 0%,#3f0e84 50%,#180b23 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c198e', endColorstr='#180b23',GradientType=0 ); /* IE6-9 */
-  background: $color-primary-0;
+  //background: $color-primary-0;
+  background: rgb(217, 217, 217);
 
   overflow: hidden;
 }
