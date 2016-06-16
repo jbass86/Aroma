@@ -1,4 +1,6 @@
 
+@import "../../../../styles/colors.scss";
+
 .login-view{
 
   position: absolute;
@@ -18,7 +20,7 @@
 }
 
 .login-title{
-  color: white;
+  color: $main-text-1;
   font-size: 3.5em;
   font-family: Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }

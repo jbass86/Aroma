@@ -4,7 +4,7 @@ React = require("react");
 
 CreateUserView = require("./CreateUserView.coffee");
 
-css = require("./res/css/login.css")
+require("./res/styles/login.scss")
 
 module.exports = React.createClass
 

@@ -8,7 +8,7 @@
   //background: -webkit-linear-gradient(top,  #3f3f3f 0%,#0e0e0e 100%); /* Chrome10-25,Safari5.1-6 */
   //background: linear-gradient(to bottom,  #3f3f3f 0%,#0e0e0e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   //filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f3f3f', endColorstr='#0e0e0e',GradientType=0 ); /* IE6-9 */
-  background: rgb(204, 204, 204);
+  background: $background-2;
 
   width: 93%;
   min-height: 93%;
@@ -36,10 +36,10 @@
 
 .widget-comp-0{
   background: $color-complement-0;
-  color: $main-text-light;
+  color: $main-text-1;
 
   &:hover{
     background: $color-complement-4;
-    color: $main-text-dark;
+    color: $main-text-2;
   }
 }

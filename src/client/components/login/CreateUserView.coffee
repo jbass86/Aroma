@@ -1,7 +1,6 @@
 # Author: Josh Bass
 
 React = require("react");
-css = require("./res/css/login.css")
 
 module.exports = React.createClass
 
