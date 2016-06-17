@@ -13,12 +13,12 @@ module.exports = React.createClass
 
   getInitialState: ->
     @filter_types = [{key: "name", name: "Name", type: "text"}, {key: "type", name: "Type", type: "text"}, \
-      {key: "cost", name: "Cost", type: "number"}, {key: "sale_price", name: "Sale Price", type: "number"}, \
+      {key: "acquire_date", name: "Acquire Date", type: "date"}, {key: "cost", name: "Cost", type: "number"},  \
+      {key: "sale_price", name: "Sale Price", type: "number"}, \
       {key: "acquire_location", name: "Acquire Location", type: "text"}];
-    {inventory_items: []};
+    {inventory_items: [], filters: {}};
 
   componentDidMount: ->
-    console.log("mounted inventory component");
     @updateInventory();
 
 
@@ -29,13 +29,17 @@ module.exports = React.createClass
         Inventory
       </div>
       <CreateInventory inventoryUpdate={@updateInventory} />
-      <Filters filterTypes={@filter_types} />
+      <Filters filterTypes={@filter_types} applyFilters={@applyFilters} />
       <InventoryTable inventoryUpdate={@updateInventory} items={@state.inventory_items} />
     </div>
 
+  applyFilters: (filters) ->
+    @setState({filters: filters}, () =>
+      @updateInventory();
+    );
+
   updateInventory: () ->
-    #this will eventually use the filters...
-    $.get("aroma/secure/get_inventory", {token: window.sessionStorage.token}, (response) =>
+    $.get("aroma/secure/get_inventory", {token: window.sessionStorage.token, filters: @state.filters}, (response) =>
       if (response.success)
         @setState(inventory_items: response.results);
     );

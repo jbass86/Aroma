@@ -4,6 +4,9 @@ React = require("react");
 Moment = require("moment");
 mathjs = require("mathjs");
 
+DatePicker = require("react-datepicker");
+Moment = require("moment");
+
 css = require("./res/styles/filters.scss");
 
 module.exports = React.createClass
@@ -51,7 +54,7 @@ module.exports = React.createClass
         <div className="collapse in" id="inventory-filters">
           {@state.filters.map(@renderFilter)}
           <div>
-            <button className="btn btn-primary apply-filters">Apply Filters</button>
+            <button className="btn btn-primary apply-filters" onClick={@applyFilters}>Apply Filters</button>
           </div>
         </div>
       </fieldset>
@@ -90,6 +93,8 @@ module.exports = React.createClass
       <input className="filter-input" type="text" value={filter.value} onChange={@handleUpdate.bind(@, filter)}></input>
     else if (filter.type == "number")
       <input className="filter-input" type="number" value={filter.value} onChange={@handleUpdate.bind(@, filter)}></input>
+    else if (filter.type == "date")
+      <DatePicker className="filter-input" selected={Moment(filter.value)} onChange={@handleUpdate.bind(@, filter)} todayButton={'Today'} />
     else
       <input className="filter-input"></input>
 
@@ -107,6 +112,12 @@ module.exports = React.createClass
         <li onClick={@changeModifier.bind(@, filter, "< lt")}><a href="#">{"< lt"}</a></li>
         <li onClick={@changeModifier.bind(@, filter, "> gt")}><a href="#">{"> gt"}</a></li>
       </ul>
+    else if (filter.type == "date")
+      <ul className="dropdown-menu">
+        <li onClick={@changeModifier.bind(@, filter, "is")}><a href="#">is</a></li>
+        <li onClick={@changeModifier.bind(@, filter, "before")}><a href="#">before</a></li>
+        <li onClick={@changeModifier.bind(@, filter, "after")}><a href="#">after</a></li>
+      </ul>
     else
       <ul className="dropdown-menu"></ul>
 
@@ -115,10 +126,13 @@ module.exports = React.createClass
     @setState({filters: @state.filters});
 
   handleUpdate: (filter, event) ->
-    update = {};
-    value = event.target.value;
+    value = {};
     if (filter.type == "number")
       value = mathjs.round(value, 2);
+    else if (filter.type == "date")
+      value = event.toDate();
+    else
+      value = event.target.value;
     filter.value = value;
     @setState({filters: @state.filters});
 
@@ -128,14 +142,27 @@ module.exports = React.createClass
 
   addFilter: (filter) ->
     modifier = "";
+    value = "";
     if (filter.type == "text")
       modifier = "is";
     else if (filter.type == "number")
       modifier = "equals";
+    else if (filter.type == "date")
+      modifier = "is";
+      value = new Date();
 
-    @state.filters.push({key: filter.key, name: filter.name, type: filter.type, modifier: modifier, value: ""});
+    @state.filters.push({key: filter.key, name: filter.name, type: filter.type, modifier: modifier, value: value});
     @setState({filters: @state.filters});
 
   deleteFilter: (index) ->
     @state.filters.splice(index, 1);
     @setState({filters: @state.filters});
+
+  applyFilters: ->
+
+    filters = {}
+    for filter in @state.filters
+      if (not filters[filter.name])
+        filters[filter.name] = [];
+      filters[filter.name].push(filter);
+    @props.applyFilters(filters);
