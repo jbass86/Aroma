@@ -12,7 +12,9 @@ require("./res/styles/inventory.scss");
 module.exports = React.createClass
 
   getInitialState: ->
-    @filter_types = [{key: "name", name: "Name", type: "text"}, {key: "type", name: "Type", type: "text"}];
+    @filter_types = [{key: "name", name: "Name", type: "text"}, {key: "type", name: "Type", type: "text"}, \
+      {key: "cost", name: "Cost", type: "number"}, {key: "sale_price", name: "Sale Price", type: "number"}, \
+      {key: "acquire_location", name: "Acquire Location", type: "text"}];
     {inventory_items: []};
 
   componentDidMount: ->

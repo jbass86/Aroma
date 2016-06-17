@@ -40,8 +40,24 @@ $mobile-breakpoint: 768px;
 
     .filter {
       margin: 5px 10px;
+      padding: 5px;
+
+      .filter-name {
+        margin-top: 5px;
+        padding: 10px;
+        font-size: 120%;
+        line-height: 0
+      }
+
+      .filter-input {
+        margin-top: 5px;
+        width: 100%;
+      }
     }
 
+    .apply-filters {
+      margin: 5px 20px;
+    }
   }
 }
 
