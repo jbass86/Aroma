@@ -3,6 +3,8 @@
 var ObjectId = require("mongodb").ObjectId;
 var uuid = require("node-uuid");
 
+var query_utils = require("../../database/QueryUtils");
+
 module.exports = class InventoryRoute {
 
   constructor(db_coord) {
@@ -76,9 +78,11 @@ module.exports = class InventoryRoute {
     var db = this.db_coord.getDatabaseInstance();
     var token = req.decoded;
 
+    var mongo_query = query_utils.buildQuery(req.query.filters);
+
     var collection = db.collection(token.group + ".inventory");
 
-    var cursor = collection.find({});
+    var cursor = collection.find(mongo_query);
     cursor.toArray().then((items) => {
       res.send({success: true, results: items});
     });

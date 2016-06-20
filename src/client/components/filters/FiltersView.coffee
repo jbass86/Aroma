@@ -108,7 +108,7 @@ module.exports = React.createClass
     else if (filter.type == "number")
       <ul className="dropdown-menu">
         <li onClick={@changeModifier.bind(@, filter, "equals")}><a href="#">equals</a></li>
-        <li onClick={@changeModifier.bind(@, filter, "not_equals")}><a href="#">not equals</a></li>
+        <li onClick={@changeModifier.bind(@, filter, "!equals")}><a href="#">not equals</a></li>
         <li onClick={@changeModifier.bind(@, filter, "< lt")}><a href="#">{"< lt"}</a></li>
         <li onClick={@changeModifier.bind(@, filter, "> gt")}><a href="#">{"> gt"}</a></li>
       </ul>
@@ -157,6 +157,8 @@ module.exports = React.createClass
   deleteFilter: (index) ->
     @state.filters.splice(index, 1);
     @setState({filters: @state.filters});
+    if (@state.filters.length == 0)
+      @props.applyFilters(@state.filters);
 
   applyFilters: ->
 
