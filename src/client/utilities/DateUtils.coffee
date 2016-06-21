@@ -4,4 +4,4 @@
 exports.getPrettyDate = (date_string) ->
 
   Date date = new Date(date_string)
-  ret_val = date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear();
+  ret_val = (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();

@@ -128,7 +128,7 @@ module.exports = React.createClass
   handleUpdate: (filter, event) ->
     value = {};
     if (filter.type == "number")
-      value = mathjs.round(value, 2);
+      value = mathjs.round(event.target.value, 2);
     else if (filter.type == "date")
       value = event.toDate();
     else

@@ -21,14 +21,15 @@ module.exports = class InventoryRoute {
 
     var is_update = req.body._id ? true : false;
 
+    console.log(req.body.acquire_date);
     var item = {
       _id: req.body._id ? ObjectId(req.body._id) : undefined,
       name: req.body.name,
       type: req.body.type,
-      acquire_date: req.body.acquire_date,
+      acquire_date: new Date(req.body.acquire_date),
       acquire_location: req.body.acquire_location,
-      cost: req.body.cost,
-      sale_price: req.body.sale_price,
+      cost: parseFloat(req.body.cost),
+      sale_price: parseFloat(req.body.sale_price),
       receipt_name: req.body.receipt_name,
       item_name: req.body.item_name,
       receipt_image_ref: req.body.receipt_image_ref,

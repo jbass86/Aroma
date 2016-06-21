@@ -3,7 +3,7 @@
 React = require("react");
 mathjs = require("mathjs");
 
-css = require("./res/css/customers.css")
+css = require("./res/styles/customers.scss")
 
 module.exports = React.createClass
 

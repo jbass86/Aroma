@@ -19,6 +19,28 @@ exports.buildQuery = function(filters){
           }else if (filter.modifier == "contains"){
             query_part[filter.key] = {$regex: filter.value};
           }
+        }else if (filter.type == "number"){
+          var number_value = parseFloat(filter.value);
+          if (filter.modifier == "equals"){
+            query_part[filter.key] = number_value;
+          }else if(filter.modifier == "!equals"){
+            query_part[filter.key] = {$ne: number_value};
+          }else if (filter.modifier == "< lt"){
+            query_part[filter.key] = {$lt: number_value};
+          }else if (filter.modifier == "> gt"){
+            query_part[filter.key] = {$gt: number_value};
+          }
+        }else if (filter.type == "date"){
+          console.log("date is");
+          console.log(filter.value);
+          var date = new Date(filter.value)
+          if (filter.modifier == "is"){
+            query_part[filter.key] = date;
+          }else if(filter.modifier == "before"){
+            query_part[filter.key] = {$lt: date};
+          }else if (filter.modifier == "after"){
+            query_part[filter.key] = {$gt: date};
+          }
         }
         query.$and.push(query_part);
       }
