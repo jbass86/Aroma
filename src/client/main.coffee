@@ -9,6 +9,7 @@ ReactDOM = require("react-dom");
 #require ("css/main.css");
 require("../../node_modules/bootstrap/dist/css/bootstrap.css");
 require("../../node_modules/react-datepicker/dist/react-datepicker.css");
+#require("../../node_modules/react-widgets/dist/css/react-widgets.css");
 require("styles/main.scss");
 
 HeaderBar = require("components/header_bar/HeaderBarView.coffee");
@@ -20,6 +21,8 @@ Inventory = require("components/inventory/InventoryView.coffee");
 Customers = require("components/customers/CustomerView.coffee");
 Orders = require("components/orders/OrderView.coffee");
 Analytics = require("components/analytics/AnalyticsView.coffee");
+
+#DropdownList = require("react-widgets").DropdownList;
 
 Backbone = require("backbone");
 
@@ -43,6 +46,7 @@ $(() ->
       </div>
 
     renderMain: () ->
+
       if (@state.authenticated)
         <div>
           <NavigationBar nav_model={nav_model}/>
@@ -66,6 +70,7 @@ $(() ->
               <Analytics nav_model={nav_model} />
             </NavView>
           </div>
+
         </div>
 
       else

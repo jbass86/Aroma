@@ -50,6 +50,8 @@ var compile_client = function(b, debug){
 var copy_assets = function(){
   gulp.src("./node_modules/bootstrap/fonts/*")
     .pipe(gulp.dest("dist/client/assets"));
+    gulp.src("./node_modules/react-widgets/dist/fonts/*")
+      .pipe(gulp.dest("dist/client/assets"));
   gulp.src("./src/client/components/**/res/images/**")
     .pipe(gulp.dest("dist/client/assets"));
 }
