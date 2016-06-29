@@ -84,54 +84,55 @@ module.exports = React.createClass
       <InventoryEdit initialState={initial_state} updateInventory={@finishEdit} handleFinish={@cancelEdit}/>
     else
       <div className="inventory-info-section">
-        <table>
-          <tbody>
-            <tr>
-              <td><span>Database ID:</span></td>
-              <td >{item._id}</td>
-            </tr>
-            <tr>
-              <td>Name:</td>
-              <td>{item.name}</td>
-            </tr>
-            <tr>
-              <td>Type:</td>
-              <td>{item.type}</td>
-            </tr>
-            <tr >
-              <td>Acquire Date:</td>
-              <td>{DateUtils.getPrettyDate(item.acquire_date)}</td>
-            </tr>
-            <tr>
-              <td>Acquire Location:</td>
-              <td>{item.acquire_location}</td>
-            </tr>
-            <tr>
-              <td>Cost:</td>
-              <td>${item.cost}</td>
-            </tr>
-            <tr>
-              <td>Sale Price:</td>
-              <td>${item.sale_price}</td>
-            </tr>
-            <tr>
-              <td>Status:</td>
-              <td>{item.status}</td>
-            </tr>
-            <tr >
-              <td>Item Image:</td>
-              <td>
-                <img src={@getItemImage(item)} alt="No Image Available" height="250"></img>
-              </td>
-            </tr>
-            <tr >
-              <td>Receipt Image:</td>
-              <td>
-                <img src={@getReceiptImage(item)} alt="No Image Available" height="250"></img>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+
+        <div className="row">
+          <div className="col-md-3">
+            <img src={@getItemImage(item)} alt="No Image Available" height="285"></img>
+          </div>
+          <div className="col-md-3">
+            <img src={@getReceiptImage(item)} alt="No Image Available" height="285"></img>
+          </div>
+
+          <div className="col-md-6">
+            <table>
+              <tbody>
+                <tr>
+                  <td><span>Database ID:</span></td>
+                  <td >{item._id}</td>
+                </tr>
+                <tr>
+                  <td>Name:</td>
+                  <td>{item.name}</td>
+                </tr>
+                <tr>
+                  <td>Type:</td>
+                  <td>{item.type}</td>
+                </tr>
+                <tr >
+                  <td>Acquire Date:</td>
+                  <td>{DateUtils.getPrettyDate(item.acquire_date)}</td>
+                </tr>
+                <tr>
+                  <td>Acquire Location:</td>
+                  <td>{item.acquire_location}</td>
+                </tr>
+                <tr>
+                  <td>Cost:</td>
+                  <td>${item.cost}</td>
+                </tr>
+                <tr>
+                  <td>Sale Price:</td>
+                  <td>${item.sale_price}</td>
+                </tr>
+                <tr>
+                  <td>Status:</td>
+                  <td>{item.status}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
       </div>
 
   expandRow: (item) ->

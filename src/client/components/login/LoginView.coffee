@@ -29,7 +29,7 @@ module.exports = React.createClass
 
           <div className="login-input">
             <div><b>Password</b></div>
-            <input type="password" onChange={@handlePassword}/>
+            <input type="password" onChange={@handlePassword} onKeyPress={@handleEnterPress}/>
           </div>
 
           <div className="login-button">
@@ -72,6 +72,10 @@ module.exports = React.createClass
 
   handlePassword: (event) ->
     @setState(password: event.target.value);
+
+  handleEnterPress: (event) ->
+    if (event.charCode == 13)
+      @handleSignIn(event);
 
   handleSignIn: (event) ->
     $.post("aroma/login", {username: @state.username, password: @state.password}, (response) =>

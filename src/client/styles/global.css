@@ -35,9 +35,9 @@
 }
 
 .collapsible-real {
-  transition: height .8s, width .8s;
-	-webkit-transition: height .8s, width .8s;
-  -moz-transition: height .8s, width .8s;
+  transition: height .4s, width .4s;
+	-webkit-transition: height .4s, width .4s;
+  -moz-transition: height .4s, width .4s;
   overflow: hidden;
 }
 
