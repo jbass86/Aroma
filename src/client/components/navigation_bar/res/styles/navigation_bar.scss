@@ -1,6 +1,8 @@
 /*Author: Josh Bass*/
 /*Description: Style information for the mast diagnostic navigation view*/
 
+@import "../../../../styles/colors.scss";
+
 .nav-bar-view{
   position: absolute;
 
@@ -44,7 +46,7 @@
     border: 2px solid rgba(0, 0, 0, 0);
 
     &:hover{
-      border: 2px solid orange;
+      border: 2px solid $rgba-complement-3;
     }
   }
 }

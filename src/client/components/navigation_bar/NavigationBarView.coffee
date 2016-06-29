@@ -36,7 +36,7 @@ module.exports = React.createClass
   getNavSelectionClasses: (name) ->
     classes = "nav-selection label";
     if (@state.nav_selection.includes(name))
-      classes += " widget-comp-0";
+      classes += " widget-primary-0";
     else
       classes += " label-default";
     classes;
