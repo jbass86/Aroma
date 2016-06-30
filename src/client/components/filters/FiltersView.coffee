@@ -69,34 +69,39 @@ module.exports = React.createClass
             {filter.name}
           </div>
         </div>
-        <div className="col-md-1">
-          <div className="btn-group">
-            <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-              {filter.modifier} <span className="caret"></span>
-            </button>
-            {@renderModifierDropdown(filter)}
+
+        <div className="col-md-8">
+          <div className="input-group">
+
+            <div className="input-group-btn">
+              <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                {filter.modifier} <span className="caret"></span>
+              </button>
+              {@renderModifierDropdown(filter)}
+            </div>
+
+            {@renderFilterInput(filter)}
+
+            <div className="input-group-btn">
+              <button className="filter-delete btn btn-danger" onClick={@deleteFilter.bind(@, index)}>
+                <span className="glyphicon glyphicon-trash"></span>
+              </button>
+            </div>
           </div>
         </div>
-        <div className="col-md-6">
-          {@renderFilterInput(filter)}
-        </div>
-        <div className="col-md-1">
-          <button className="filter-delete btn btn-danger" onClick={@deleteFilter.bind(@, index)}>
-            <span className="glyphicon glyphicon-trash"></span>
-          </button>
-        </div>
       </div>
+
     </div>
 
   renderFilterInput: (filter) ->
     if (filter.type == "text")
-      <input className="filter-input" type="text" value={filter.value} onChange={@handleUpdate.bind(@, filter)}></input>
+      <input className="form-control" type="text" value={filter.value} onChange={@handleUpdate.bind(@, filter)}></input>
     else if (filter.type == "number")
-      <input className="filter-input" type="number" value={filter.value} onChange={@handleUpdate.bind(@, filter)}></input>
+      <input className="form-control" type="number" value={filter.value} onChange={@handleUpdate.bind(@, filter)}></input>
     else if (filter.type == "date")
-      <DatePicker className="filter-input" selected={Moment(filter.value)} onChange={@handleUpdate.bind(@, filter)} todayButton={'Today'} />
+      <DatePicker className="form-control" selected={Moment(filter.value)} onChange={@handleUpdate.bind(@, filter)} todayButton={'Today'} />
     else
-      <input className="filter-input"></input>
+      <input className="filter-input form-control"></input>
 
   renderModifierDropdown: (filter) ->
     if (filter.type == "text")

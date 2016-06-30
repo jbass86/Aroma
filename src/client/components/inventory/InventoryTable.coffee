@@ -43,7 +43,7 @@ module.exports = React.createClass
     if (@state.expanded_rows[item._id])
       #make sure expanded row state has the most up to date item.
       @state.expanded_rows[item._id] = item;
-      info_classes += " full-height-medium";
+      info_classes += " full-height-large";
     else
       info_classes += " no-height";
 
