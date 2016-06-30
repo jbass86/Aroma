@@ -48,7 +48,7 @@ module.exports = React.createClass
           Acquire Date:
         </div>
         <div className="col-md-8">
-          <DatePicker className="inventory-input-field" selected={@state.acquire_date} onChange={@handleAcquireDate} todayButton={'Today'} />
+          <DatePicker className="form-control inventory-input-field" selected={@state.acquire_date} onChange={@handleAcquireDate} todayButton={'Today'} />
         </div>
       </div>
 
@@ -95,11 +95,11 @@ module.exports = React.createClass
           <label style={{"float": "left"}} className="btn btn-primary">
             Select File <input type="file" style={{"display": "none"}} accept="image/*" onChange={(event)=>@handleFieldUpdate(name, event)} />
           </label>
-          <input type="text" className="form-control inventory-input-field" style={{"float": "left", "width": "70%"}} value={@state[name]} readOnly="true" />
+          <input type="text" className="form-control inventory-input-field" style={{"float": "left", "width": "75.8%"}} value={@state[name]} readOnly="true" />
         </div>
       else
         <div>
-          <input type={type} className={input_class} value={@state[name]} onChange={(event)=>@handleFieldUpdate(name, event)} />
+          <input type={type} className="form-control inventory-input-field" value={@state[name]} onChange={(event)=>@handleFieldUpdate(name, event)} />
         </div>
 
     <div className="row inventory-create-row">

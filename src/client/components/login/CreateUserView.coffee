@@ -16,7 +16,7 @@ module.exports = React.createClass
         <div className="user-input-label">
           Username:
         </div>
-        <input type="text" className="user-input" value={@state.username} onChange={(event)=>@handleFieldUpdate("username", event)}/>
+        <input type="text" className="form-control" value={@state.username} onChange={(event)=>@handleFieldUpdate("username", event)}/>
         <div className="clear-both"></div>
       </div>
 
@@ -24,7 +24,7 @@ module.exports = React.createClass
         <div className="user-input-label">
           Password:
         </div>
-        <input type="password" className="user-input" value={@state.password} onChange={(event)=>@handleFieldUpdate("password", event)}/>
+        <input type="password" className="form-control" value={@state.password} onChange={(event)=>@handleFieldUpdate("password", event)}/>
         <div className="clear-both"></div>
       </div>
 
@@ -32,7 +32,7 @@ module.exports = React.createClass
         <div className="user-input-label">
           Confirm Password:
         </div>
-        <input type="password" className={"user-input" + if (!@state.passwords_match) then " pw-mismatch" else ""}
+        <input type="password" className={"user-input" + if (!@state.passwords_match) then " form-control pw-mismatch" else " form-control"}
           value={@state.confirm_pw} onChange={(event)=>@handleFieldUpdate("confirm_pw", event)}/>
         <div className="clear-both"></div>
       </div>
@@ -41,7 +41,7 @@ module.exports = React.createClass
         <div className="user-input-label">
           Email:
         </div>
-        <input type="text" className="user-input" value={@state.email}  onChange={(event)=>@handleFieldUpdate("email", event)}/>
+        <input type="text" className="form-control user-input" value={@state.email}  onChange={(event)=>@handleFieldUpdate("email", event)}/>
         <div className="clear-both"></div>
       </div>
 
@@ -49,7 +49,7 @@ module.exports = React.createClass
         <div className="user-input-label">
           Group Name:
         </div>
-        <input type="text" className="user-input" value={@state.group} onChange={(event)=>@handleFieldUpdate("group", event)}/>
+        <input type="text" className="form-control user-input" value={@state.group} onChange={(event)=>@handleFieldUpdate("group", event)}/>
         <div className="clear-both"></div>
       </div>
 

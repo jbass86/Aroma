@@ -73,20 +73,20 @@ module.exports = React.createClass
         <div className="col-md-8">
           <div className="input-group">
 
-            <div className="input-group-btn">
+            <span className="input-group-btn">
               <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                 {filter.modifier} <span className="caret"></span>
               </button>
               {@renderModifierDropdown(filter)}
-            </div>
+            </span>
 
             {@renderFilterInput(filter)}
 
-            <div className="input-group-btn">
+            <span className="input-group-btn">
               <button className="filter-delete btn btn-danger" onClick={@deleteFilter.bind(@, index)}>
                 <span className="glyphicon glyphicon-trash"></span>
               </button>
-            </div>
+            </span>
           </div>
         </div>
       </div>

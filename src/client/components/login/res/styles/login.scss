@@ -3,11 +3,15 @@
 
 .login-view{
 
+  overflow: auto;
+
   position: absolute;
   width: 100vw;
   height: 100vh;
 
   z-index: 25;
+
+  padding-bottom: 25px;
 }
 
 .login-container{
@@ -47,7 +51,6 @@
 }
 
 .login-box .login-input input{
-  width: 75%;
   color: black;
 }
 
@@ -76,18 +79,18 @@
 }
 
 .create-user-view .user-input-label{
-  float: left;
+  // float: left;
   text-align: left;
 
-  width: 25%;
+  // width: 25%;
   height: 5%;
   border-radius: 3px;
 }
 
 
 .login-box .create-user-view input{
-  float: left;
-  width: 70%;
+  // float: left;
+  // width: 70%;
   color: black;
 
   height: 5%;

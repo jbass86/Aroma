@@ -24,12 +24,12 @@ module.exports = React.createClass
 
           <div className="login-input">
             <div><b>Username</b></div>
-            <input type="text" onChange={@handleUsername}/>
+            <input className="form-control" type="text" onChange={@handleUsername}/>
           </div>
 
           <div className="login-input">
             <div><b>Password</b></div>
-            <input type="password" onChange={@handlePassword} onKeyPress={@handleEnterPress}/>
+            <input className="form-control" type="password" onChange={@handlePassword} onKeyPress={@handleEnterPress}/>
           </div>
 
           <div className="login-button">
