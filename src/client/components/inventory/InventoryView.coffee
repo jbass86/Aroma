@@ -1,13 +1,10 @@
 # Author: Josh Bass
 
 React = require("react");
-mathjs = require("mathjs");
 
 CreateInventory = require("./CreateInventory.coffee");
 Filters = require("client/components/filters/FiltersView.coffee");
 InventoryTable = require("./InventoryTable.coffee");
-
-require("./res/styles/inventory.scss");
 
 module.exports = React.createClass
 

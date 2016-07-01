@@ -9,6 +9,7 @@
   //background: linear-gradient(to bottom,  #3f3f3f 0%,#0e0e0e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   //filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f3f3f', endColorstr='#0e0e0e',GradientType=0 ); /* IE6-9 */
   background: $background-2;
+  color: $color-primary-4;
 
   width: 93%;
   min-height: 93%;
@@ -19,13 +20,13 @@
   margin-bottom: 25px;
   padding-top: 10px;
   padding-bottom: 25px;
-}
 
-.section-title{
-  color: $color-primary-3;
-  text-align: center;
-  padding: 5px;
-  font-size: 250%;
+  .section-title{
+    color: $color-primary-3;
+    text-align: center;
+    padding: 5px;
+    font-size: 250%;
+  }
 }
 
 .general-alert{
@@ -51,5 +52,33 @@
   &:hover{
     background: $color-complement-4;
     color: $main-text-2;
+  }
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+  input[type=file] {
+      position: absolute;
+      top: 0;
+      right: 0;
+      min-width: 100%;
+      min-height: 100%;
+      font-size: 100px;
+      text-align: right;
+      filter: alpha(opacity=0);
+      opacity: 0;
+      outline: none;
+      background: white;
+      cursor: inherit;
+      display: block;
+  }
+}
+
+@media only screen
+and (max-device-width: 768px) {
+
+  .common-view {
+    font-size: 300%;
   }
 }

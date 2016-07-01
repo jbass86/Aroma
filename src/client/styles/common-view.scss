@@ -1,0 +1,179 @@
+
+.common-view{
+
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#3f3f3f+0,0e0e0e+100 */
+  //background: #3f3f3f; /* Old browsers */
+  //background: -moz-linear-gradient(top,  #3f3f3f 0%, #0e0e0e 100%); /* FF3.6-15 */
+  //background: -webkit-linear-gradient(top,  #3f3f3f 0%,#0e0e0e 100%); /* Chrome10-25,Safari5.1-6 */
+  //background: linear-gradient(to bottom,  #3f3f3f 0%,#0e0e0e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  //filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f3f3f', endColorstr='#0e0e0e',GradientType=0 ); /* IE6-9 */
+  background: $background-2;
+  color: $color-primary-4;
+
+  width: 93%;
+  min-height: 93%;
+
+  border-radius: 4px;
+
+  margin: auto;
+  margin-bottom: 25px;
+  padding-top: 10px;
+  padding-bottom: 25px;
+
+  .section-title{
+    color: $color-primary-3;
+    text-align: center;
+    padding: 5px;
+    font-size: 250%;
+  }
+
+  .common-row{
+    text-align: center;
+    padding: 15px 0;
+    font-size: 150%;
+  }
+
+  .common-table-entry{
+
+    border: 2px solid $color-primary-1;
+    border-radius: 5px;
+    margin: 10px;
+    background: $background-3;
+
+    &:hover{
+      border: 2px solid $color-complement-0;
+    }
+
+    .item-edit-buttons{
+      width: 200px;
+      padding: 10px;
+      margin: auto;
+
+      button{
+        font-size: 140%;
+        width: 80px;
+        height: 60px;
+        margin: 5px;
+      }
+    }
+
+    .delete-item-alert{
+      width: 200px;
+      padding: 10px 15px;
+      margin: auto;
+      margin-bottom: 10px;
+    }
+
+    .common-info-section{
+
+      text-align: left;
+
+      text-align: center;
+      margin: auto;
+      margin-bottom: 10px;
+
+      table{
+        width: 100%;
+        text-align: center;
+        border-radius: 4px;
+
+        td{
+          border: 1px solid $color-primary-1;
+          border-radius: 4px;
+          padding: 10px 15px;
+          vertical-align: center;
+        }
+      }
+      img{
+        border-radius: 4px;
+        margin: 10px;
+      }
+    }
+  }
+
+  .create-item{
+
+    .mod-button {
+      margin: 5px;
+      float: right;
+    }
+  }
+
+  .add-item {
+
+    border: 1px solid $color-primary-1;
+    border-radius: 2px;
+
+    width: 50%;
+    margin: auto;
+    margin-bottom: 10px;
+
+    .common-create-row{
+      margin: 10px;
+    }
+
+    .common-input-field{
+      color: black;
+      width: 100%;
+    }
+
+    .common-file-input{
+      color: white;
+    }
+
+    .common-input-field{
+
+      .common-date-field{
+        color: black;
+        float: left;
+        width: 100%;
+      }
+    }
+
+    .common-create-buttons{
+      width: 50%;
+      margin: auto;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      text-align: center;
+    }
+
+    .react-datepicker__input-container{
+      width: 100%;
+    }
+  }
+}
+
+@media only screen
+and (max-device-width: 768px) {
+
+  .common-view {
+    font-size: 300%;
+
+    .common-row{
+      font-size: 100%;
+    }
+
+    .common-info-section{
+      width: 90%;
+    }
+
+    .common-table-entry{
+
+      .item-edit-buttons{
+        button{
+         font-size: 120%;
+         height: 80px;
+       }
+      }
+
+      .delete-item-alert{
+        width: 300px;
+
+        .btn{
+          font-size: 100%;
+        }
+      }
+    }
+  }
+}
