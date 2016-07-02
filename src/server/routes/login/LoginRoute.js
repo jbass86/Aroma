@@ -27,7 +27,7 @@ module.exports = class LoginRoute {
         }else{
           if (item){
             if (bcrypt.compareSync(req.body.password, item.password)){
-              var token = jsonwebtoken.sign({username: item.username, group: "default"}, _this.auth_model.get("token_pw"));
+              var token = jsonwebtoken.sign({username: item.username, group: item.group}, _this.auth_model.get("token_pw"));
               res.send({success: true, message: "Authentication Sucess!!", token: token, username: item.username, group: item.group});
             }else{
               res.send({success: false, message: "Username/Password Incorrect", token});

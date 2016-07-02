@@ -81,6 +81,9 @@ module.exports = class InventoryRoute {
 
     var mongo_query = query_utils.buildQuery(req.query.filters);
 
+    console.log("My group!!!!!");
+    console.log(token.group);
+
     var collection = db.collection(token.group + ".inventory");
 
     var cursor = collection.find(mongo_query);

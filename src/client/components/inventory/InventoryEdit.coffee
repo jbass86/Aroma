@@ -97,6 +97,10 @@ module.exports = React.createClass
           </label>
           <input type="text" className="form-control inventory-input-field" style={{"float": "left", "width": "75.8%"}} value={@state[name]} readOnly="true" />
         </div>
+      else if (type == "number")
+        <div>
+          <input type={type} className="form-control inventory-input-field" step=.01 value={@state[name]} onChange={(event)=>@handleFieldUpdate(name, event)} />
+        </div>
       else
         <div>
           <input type={type} className="form-control inventory-input-field" value={@state[name]} onChange={(event)=>@handleFieldUpdate(name, event)} />
@@ -114,8 +118,8 @@ module.exports = React.createClass
   handleFieldUpdate: (field_name, event) ->
     update = {};
     value = event.target.value;
-    if (event.target.type == "number")
-      value = mathjs.round(value, 2);
+    #if (event.target.type == "number")
+      #value = mathjs.round(value, 2);
     if (event.target.type == "file")
       paths = value.split("\\");
       value = paths[paths.length - 1];
@@ -140,8 +144,8 @@ module.exports = React.createClass
     form.append("type", @state.type);
     form.append("acquire_location", @state.acquire_location);
     form.append("acquire_date", @state.acquire_date.toDate());
-    form.append("cost", @state.cost);
-    form.append("sale_price", @state.sale_price);
+    form.append("cost", mathjs.round(@state.cost, 2));
+    form.append("sale_price", mathjs.round(@state.sale_price, 2));
     form.append("receipt_name", @state.receipt_image);
     form.append("item_name", @state.item_image);
     form.append("item_image_ref", @state.item_image_ref);

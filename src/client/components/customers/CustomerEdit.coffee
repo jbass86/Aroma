@@ -106,14 +106,8 @@ module.exports = React.createClass
     else if (event.target.type == "number")
       value = event.target.value;
       value = mathjs.round(value, 2);
-    else if (event.target.type == "file")
+    else if (event.target.type == "text")
       value = event.target.value;
-      paths = value.split("\\");
-      value = paths[paths.length - 1];
-      if (field_name == "receipt_image")
-        update.receipt_files = event.target.files;
-      else if (field_name == "item_image")
-        update.item_image_files = event.target.files;
 
     update[field_name] = value;
     @setState(update);
