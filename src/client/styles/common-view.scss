@@ -21,11 +21,6 @@
     font-size: 250%;
   }
 
-  .common-row{
-    text-align: center;
-    padding: 15px 0;
-    font-size: 150%;
-  }
 
   .common-table-entry{
 
@@ -36,6 +31,12 @@
 
     &:hover{
       border: 2px solid $color-complement-0;
+    }
+
+    .common-row{
+      text-align: center;
+      padding: 15px 0;
+      font-size: 150%;
     }
 
     .item-edit-buttons{

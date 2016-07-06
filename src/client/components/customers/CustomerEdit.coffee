@@ -9,7 +9,7 @@ module.exports = React.createClass
 
   getInitialState: ->
     @default_state = {_id: undefined, first_name: "", middle_name: "", last_name: "", address: "", \
-      email: "", phone_number: "", social_media: "", birthday: Moment(), \
+      email: "", phone_number: "", social_media: "", birthday: undefined, \
       customer_alert: "", customer_success: false, update_from_props: true};
 
   componentDidMount: ->
@@ -35,7 +35,7 @@ module.exports = React.createClass
       birthday = if @props.initialState.birthday then @props.initialState.birthday else @default_state.birthday;
 
       @setState({_id: @props.initialState._id, first_name: first_name, middle_name: middle_name, last_name: last_name, \
-      address: address, birthday: birthday, update_from_props: false});
+      email: email, phone_number: phone_number, social_media: social_media, address: address, birthday: birthday, update_from_props: false});
 
   render: ->
 
@@ -66,16 +66,16 @@ module.exports = React.createClass
 
   getCreateItemAlert: () ->
     success = if (@state.customer_success) then " alert-success" else " alert-danger";
-    if (@state.item_alert)
+    if (@state.customer_alert)
       <div className={"general-alert alert alert-dismissible" + success} role="alert">
          <button type="button" className="close" aria-label="Close" onClick={@dismissAlert}><span aria-hidden="true">&times;</span></button>
-         <strong>{if (@state.customer_success) then "Success!" else "Error!"}</strong> {@state.item_alert}
+         <strong>{if (@state.customer_success) then "Success!" else "Error!"}</strong> {@state.customer_alert}
       </div>
     else
       <div></div>
 
   dismissAlert: (event) ->
-    @setState({item_alert: ""});
+    @setState({customer_alert: ""});
 
   createInputField: (name, display_name, type) ->
 
@@ -85,7 +85,7 @@ module.exports = React.createClass
         <DatePicker className="form-control common-input-field" selected={@state[name]} onChange={(moment) => @handleFieldUpdate(name, moment)} todayButton={'Today'} />
       else
         <div>
-          <input type={type} className="form-control common-input-field" value={@state[name]} onChange={(event)=>@handleFieldUpdate(name, event)} />
+          <input type={type} className="form-control common-input-field" value={@state[name]} onChange={(event) => @handleFieldUpdate(name, event)} />
         </div>
 
     <div className="row common-create-row">
@@ -125,7 +125,7 @@ module.exports = React.createClass
     form.append("email", @state.email);
     form.append("phone_number", @state.phone_number);
     form.append("social_media", @state.social_media);
-    form.append("birthday", @state.birthday.toDate());
+    form.append("birthday", if @state.birthday then @state.birthday.toDate() else undefined);
 
     $.ajax({
       url: 'aroma/secure/update_customer',

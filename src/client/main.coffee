@@ -55,7 +55,7 @@ $(() ->
             <HeaderBar nav_model={nav_model}/>
           </div>
 
-          <div className={"main-area" + @getMainClasses()}>
+          <div className={"main-area" + @getMainClasses()} onClick={@closeNav}>
 
             <NavView nav_model={nav_model} name="inventory">
               <Inventory />
@@ -99,6 +99,9 @@ $(() ->
       window.setTimeout(()=>
         @setState({remove_login: true});
       , 1000);
+
+    closeNav: () ->
+      nav_model.set("nav_visible", false);
 
   if (window.sessionStorage.token)
     $.post("aroma/secure/authenticate_token", {token: window.sessionStorage.token}, (response) =>

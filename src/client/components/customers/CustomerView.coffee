@@ -4,6 +4,7 @@ React = require("react");
 mathjs = require("mathjs");
 
 CreateCustomer = require("./CustomerCreate.coffee");
+CustomerTable = require("./CustomerTable.coffee");
 Filters = require("client/components/filters/FiltersView.coffee");
 
 css = require("./res/styles/customers.scss")
@@ -27,8 +28,9 @@ module.exports = React.createClass
       <div className="section-title">
         Customers
       </div>
-      <CreateCustomer inventoryUpdate={@updateInventory} />
+      <CreateCustomer customerUpdate={@updateCustomers} />
       <Filters filterTypes={@filter_types} applyFilters={@applyFilters} />
+      <CustomerTable customerUpdate={@updateCustomers} items={@state.customers} />
     </div>
 
   applyFilters: (filters) ->

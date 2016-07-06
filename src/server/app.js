@@ -21,6 +21,7 @@ var AuthRouter = require("./routes/authenticate/AuthenticateRouter");
 var LoginRoute = require("./routes/login/LoginRoute");
 var UserRoute = require("./routes/user/UserRoute");
 var InventoryRoute = require("./routes/inventory/InventoryRoute");
+var CustomerRoute = require("./routes/customers/CustomerRoute");
 
 var app = express();
 
@@ -50,6 +51,7 @@ var auth_router = new AuthRouter(auth_model);
 var login_route = new LoginRoute(mongo_coord, auth_model);
 var user_route = new UserRoute(mongo_coord);
 var inventory_route = new InventoryRoute(mongo_coord);
+var customer_route = new CustomerRoute(mongo_coord);
 
 app.post("/aroma/create_user", user_route.httpPostCreateUser.bind(user_route));
 app.post("/aroma/login", login_route.httpPostAuthUser.bind(login_route));
@@ -61,6 +63,10 @@ auth_router.getRouter().post("/update_inventory", inventory_route.httpPostUpdate
 auth_router.getRouter().get("/get_inventory", inventory_route.httpGetItems.bind(inventory_route));
 auth_router.getRouter().post("/delete_inventory", inventory_route.httpDeleteItems.bind(inventory_route));
 auth_router.getRouter().get("/get_inventory_image", inventory_route.httpGetInventoryImage.bind(inventory_route));
+
+auth_router.getRouter().post("/update_customer", customer_route.httpPostUpdateItem.bind(customer_route));
+auth_router.getRouter().get("/get_customers", customer_route.httpGetItems.bind(customer_route));
+auth_router.getRouter().post("/delete_customers", customer_route.httpDeleteItems.bind(customer_route));
 /////////////////
 
 app.use("/aroma/secure", auth_router.getRouter());
