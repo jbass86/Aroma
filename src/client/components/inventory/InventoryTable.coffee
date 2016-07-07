@@ -65,11 +65,11 @@ module.exports = React.createClass
       </div>
 
       <div className={delete_alert_classes}>
-        <div className="delete-item-alert alert alert-danger" role="alert">
+        <div className="delete-item-alert alert common-alert" role="alert">
            <span>Are you Sure?</span>
-           <div style={{"marginTop": "10px"}} className="row">
-             <button className="col-xs-6 btn btn-success" onClick={@deleteItem.bind(@, item)}>Yes</button>
-             <button className="col-xs-6 btn btn-danger" onClick={@confirmDelete.bind(@, item)}>No</button>
+           <div className="row alert-panel">
+             <button className="col-xs-6 btn button-ok" onClick={@deleteItem.bind(@, item)}>Yes</button>
+             <button className="col-xs-6 btn button-cancel" onClick={@confirmDelete.bind(@, item)}>No</button>
            </div>
         </div>
       </div>

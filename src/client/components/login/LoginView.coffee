@@ -33,10 +33,10 @@ module.exports = React.createClass
           </div>
 
           <div className="login-button">
-            <button className="btn btn-success" onClick={@handleSignIn}>Sign in</button>
+            <button className="btn button-ok" onClick={@handleSignIn}>Sign in</button>
           </div>
           <div className="login-button">
-            <button className="btn btn-primary"  onClick={@handleCreateUser}>Create an Account</button>
+            <button className="btn button-cancel"  onClick={@handleCreateUser}>Create an Account</button>
           </div>
           {@getLoginAlert()}
           <div className={@createUserClasses()}>
@@ -48,8 +48,7 @@ module.exports = React.createClass
 
   getLoginAlert: () ->
     if (@state.login_alert)
-      console.log("show failed stuff...");
-      <div className="login-alert alert alert-danger alert-dismissible" role="alert">
+      <div className="login-alert alert common-alert alert-dismissible" role="alert">
          <button type="button" className="close" aria-label="Close" onClick={@dismissAlert}><span aria-hidden="true">&times;</span></button>
          <strong>Error!</strong>  {@state.login_alert}
       </div>

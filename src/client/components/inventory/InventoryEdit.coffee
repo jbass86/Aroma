@@ -61,8 +61,8 @@ module.exports = React.createClass
       {@getCreateItemAlert()}
 
       <div className="row inventory-create-buttons">
-        <button className="col-md-6 btn btn-primary" onClick={@handleCreateItem}>{@getCreateButtonText()}</button>
-        <button className="col-md-6 btn btn-danger" onClick={@handleCancel}>Cancel</button>
+        <button className="col-md-6 btn button-ok" onClick={@handleCreateItem}>{@getCreateButtonText()}</button>
+        <button className="col-md-6 btn button-cancel" onClick={@handleCancel}>Cancel</button>
       </div>
     </div>
 
@@ -95,7 +95,7 @@ module.exports = React.createClass
           <label style={{"float": "left"}} className="btn btn-primary">
             Select File <input type="file" style={{"display": "none"}} accept="image/*" onChange={(event)=>@handleFieldUpdate(name, event)} />
           </label>
-          <input type="text" className="form-control inventory-input-field" style={{"float": "left", "width": "75.8%"}} value={@state[name]} readOnly="true" />
+          <input type="text" className="form-control inventory-input-field" style={{"float": "left", "width": "75%"}} value={@state[name]} readOnly="true" />
         </div>
       else if (type == "number")
         <div>

@@ -56,15 +56,14 @@ module.exports = React.createClass
       {@getUserAlert()}
 
       <div className="user-input-buttons">
-        <button className="btn btn-success" onClick={@handleCreateUser}>Create User</button>
-        <button className="btn btn-danger" onClick={@handleCloseEvent}>Cancel</button>
+        <button className="btn button-ok" onClick={@handleCreateUser}>Create User</button>
+        <button className="btn button-cancel" onClick={@handleCloseEvent}>Cancel</button>
       </div>
     </div>
 
   getUserAlert: () ->
-    success = if (@state.user_success) then " alert-success" else " alert-danger";
     if (@state.user_alert)
-      <div className={"login-alert alert alert-dismissible" + success} role="alert">
+      <div className={"login-alert alert alert-dismissible common-alert"} role="alert">
          <button type="button" className="close" aria-label="Close" onClick={@dismissAlert}><span aria-hidden="true">&times;</span></button>
          <strong>{if (@state.user_success) then "Success!" else "Error!"}</strong> {@state.user_alert}
       </div>
@@ -87,10 +86,8 @@ module.exports = React.createClass
     );
 
   handleCreateUser: (event) ->
-    console.log("gonna do some stuff here to make a user");
     form_valid = @validateInfo();
     if (form_valid)
-      console.log("create user request");
       user = {
         username: @state.username,
         password: @state.password,

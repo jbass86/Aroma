@@ -55,6 +55,36 @@
   }
 }
 
+.common-alert{
+  color: $color-primary-4;
+  background: $background-2;
+  border-color: $color-primary-2;
+
+  .alert-panel{
+    margin: 10px;
+  }
+}
+
+.button-ok{
+  background: $color-complement-0;
+  color: $main-text-3;
+  font-weight: bold;
+  &:hover{
+    background: $color-complement-4;
+    color: $main-text-1;
+  }
+}
+
+.button-cancel{
+  background: $color-primary-0;
+  color: $main-text-3;
+  font-weight: bold;
+  &:hover{
+    background: $color-primary-4;
+    color: $main-text-1;
+  }
+}
+
 .btn-file {
   position: relative;
   overflow: hidden;
