@@ -5,8 +5,6 @@ React = require("react");
 InventoryEdit = require("./InventoryEdit.coffee");
 Moment = require("moment");
 
-require("./res/styles/create_inventory.scss");
-
 module.exports = React.createClass
 
 
@@ -20,8 +18,8 @@ module.exports = React.createClass
 
   render: ->
 
-    <div className="create-inventory">
-      <button type="button" className="inventory-mod-button btn btn-primary" onClick={@showCreateInventory}>Add Item</button>
+    <div className="create-item">
+      <button type="button" className="mod-button btn btn-primary" onClick={@showCreateInventory}>Add Item</button>
       <div className="clear-both"></div>
       <div className={@getCreateInventoryClasses()}>
         <InventoryEdit updateInventory={@updateInventory} handleFinish={@handleClose}/>

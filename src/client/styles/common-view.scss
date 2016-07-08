@@ -66,24 +66,6 @@
       text-align: center;
       margin: auto;
       margin-bottom: 10px;
-
-      table{
-        width: 100%;
-        text-align: center;
-        border-radius: 4px;
-
-        td{
-          border: 1px solid $color-primary-1;
-          border-radius: 4px;
-          padding: 10px 15px;
-          vertical-align: center;
-        }
-      }
-
-      img{
-        border-radius: 4px;
-        margin: 10px;
-      }
     }
   }
 
@@ -152,6 +134,16 @@ and (max-device-width: 768px) {
 
     .common-info-section{
       width: 90%;
+    }
+
+    .add-item{
+      .common-create-buttons .btn{
+        font-size: 100%;
+      }
+
+      .common-file-input{
+        padding-top: 25px;
+      }
     }
 
     .common-table-entry{

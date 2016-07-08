@@ -32,7 +32,7 @@ module.exports = React.createClass
       email = if @props.initialState.email then @props.initialState.email else @default_state.email;
       phone_number = if @props.initialState.phone_number then @props.initialState.phone_number else @default_state.phone_number;
       social_media = if @props.initialState.social_media then @props.initialState.social_media else @default_state.social_media;
-      birthday = if @props.initialState.birthday then @props.initialState.birthday else @default_state.birthday;
+      birthday = if @props.initialState.birthday then Moment(new Date(@props.initialState.birthday)) else @default_state.birthday;
 
       @setState({_id: @props.initialState._id, first_name: first_name, middle_name: middle_name, last_name: last_name, \
       email: email, phone_number: phone_number, social_media: social_media, address: address, birthday: birthday, update_from_props: false});
@@ -125,7 +125,7 @@ module.exports = React.createClass
     form.append("email", @state.email);
     form.append("phone_number", @state.phone_number);
     form.append("social_media", @state.social_media);
-    form.append("birthday", if @state.birthday then @state.birthday.toDate() else undefined);
+    if @state.birthday then form.append("birthday", @state.birthday.toDate());
 
     $.ajax({
       url: 'aroma/secure/update_customer',

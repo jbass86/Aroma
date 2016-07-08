@@ -75,7 +75,8 @@ module.exports = React.createClass
 
     if (@state.editing_item == item._id)
       initial_state = {_id: item._id, first_name: item.first_name, middle_name: item.middle_name, last_name: item.last_name, \
-        address: item.address, email: item.email, phone_number: item.phone_number, social_media: item.social_media, birthday: Moment(new Date(item.birthday))};
+        address: item.address, email: item.email, phone_number: item.phone_number, social_media: item.social_media, \
+        birthday: item.birthday};
       <CustomerEdit initialState={initial_state} updateCustomer={@finishEdit} handleFinish={@cancelEdit}/>
     else
       <div className="common-info-section">
@@ -128,7 +129,7 @@ module.exports = React.createClass
             Birthday:
           </div>
           <div className="col-md-3 customer-info">
-            {if item.birthday != "undefined" then DateUtils.getPrettyDate(item.birthday) else "N/A"}
+            {if item.birthday then DateUtils.getPrettyDate(item.birthday) else "N/A"}
           </div>
         </div>
 

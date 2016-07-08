@@ -38,17 +38,17 @@ module.exports = React.createClass
 
   render: ->
 
-    <div className="add-inventory">
+    <div className="add-item">
 
       {@createInputField("name", "Name:", "text")}
       {@createInputField("type", "Type:", "text")}
 
-      <div className="row inventory-create-row">
+      <div className="row common-create-row">
         <div className="col-md-4">
           Acquire Date:
         </div>
         <div className="col-md-8">
-          <DatePicker className="form-control inventory-input-field" selected={@state.acquire_date} onChange={@handleAcquireDate} todayButton={'Today'} />
+          <DatePicker className="form-control common-input-field" selected={@state.acquire_date} onChange={@handleAcquireDate} todayButton={'Today'} />
         </div>
       </div>
 
@@ -60,7 +60,7 @@ module.exports = React.createClass
 
       {@getCreateItemAlert()}
 
-      <div className="row inventory-create-buttons">
+      <div className="row common-create-buttons">
         <button className="col-md-6 btn button-ok" onClick={@handleCreateItem}>{@getCreateButtonText()}</button>
         <button className="col-md-6 btn button-cancel" onClick={@handleCancel}>Cancel</button>
       </div>
@@ -87,7 +87,7 @@ module.exports = React.createClass
 
   createInputField: (name, display_name, type) ->
 
-    input_class = if (type == "file") then "inventory-file-input" else "inventory-input-field";
+    input_class = if (type == "file") then "common-file-input" else "common-input-field";
 
     inputCreate = () =>
       if (type == "file")
@@ -95,18 +95,18 @@ module.exports = React.createClass
           <label style={{"float": "left"}} className="btn btn-primary">
             Select File <input type="file" style={{"display": "none"}} accept="image/*" onChange={(event)=>@handleFieldUpdate(name, event)} />
           </label>
-          <input type="text" className="form-control inventory-input-field" style={{"float": "left", "width": "75%"}} value={@state[name]} readOnly="true" />
+          <input type="text" className="form-control common-input-field" style={{"float": "left", "width": "75%"}} value={@state[name]} readOnly="true" />
         </div>
       else if (type == "number")
         <div>
-          <input type={type} className="form-control inventory-input-field" step=.01 value={@state[name]} onChange={(event)=>@handleFieldUpdate(name, event)} />
+          <input type={type} className="form-control common-input-field" step=.01 value={@state[name]} onChange={(event)=>@handleFieldUpdate(name, event)} />
         </div>
       else
         <div>
-          <input type={type} className="form-control inventory-input-field" value={@state[name]} onChange={(event)=>@handleFieldUpdate(name, event)} />
+          <input type={type} className="form-control common-input-field" value={@state[name]} onChange={(event)=>@handleFieldUpdate(name, event)} />
         </div>
 
-    <div className="row inventory-create-row">
+    <div className="row common-create-row">
       <div className="col-md-4">
         {display_name}
       </div>

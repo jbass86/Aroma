@@ -1,8 +1,5 @@
 # Author: Josh Bass
 
-require("./res/styles/inventory_table.scss");
-
-
 React = require("react");
 InventoryEdit = require("./InventoryEdit.coffee");
 Moment = require("moment");
@@ -20,12 +17,12 @@ module.exports = React.createClass
 
   render: ->
 
-    <div style={{"margin": "auto"}} className="inventory-table">
+    <div style={{"margin": "auto"}} className="common-table">
 
       {@props.items.map((item, index) =>
-        <div className="inventory-table-entry" key={item._id}>
+        <div className="common-table-entry" key={item._id}>
 
-          <div className="row inventory-row" onClick={@expandRow.bind(@, item)}>
+          <div className="row common-row" onClick={@expandRow.bind(@, item)}>
             <div className="col-md-3">{item.name}</div>
             <div className="col-md-3">{item.type}</div>
             <div className="col-md-3">${item.cost}</div>
@@ -83,7 +80,7 @@ module.exports = React.createClass
         acquire_location: item.acquire_location, cost: item.cost, receipt_image_ref: item.receipt_image_ref, item_image_ref: item.item_image_ref};
       <InventoryEdit initialState={initial_state} updateInventory={@finishEdit} handleFinish={@cancelEdit}/>
     else
-      <div className="inventory-info-section">
+      <div className="common-info-section">
 
         <div className="row">
           <div className="col-md-3">

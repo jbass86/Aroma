@@ -6,6 +6,8 @@ CreateInventory = require("./CreateInventory.coffee");
 Filters = require("client/components/filters/FiltersView.coffee");
 InventoryTable = require("./InventoryTable.coffee");
 
+require("./res/styles/inventory.scss");
+
 module.exports = React.createClass
 
   getInitialState: ->
@@ -21,7 +23,7 @@ module.exports = React.createClass
 
   render: ->
 
-    <div className="common-view inventory-view">
+    <div className="common-view">
       <div className="section-title">
         Inventory
       </div>
