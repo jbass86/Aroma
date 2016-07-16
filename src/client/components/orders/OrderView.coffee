@@ -3,11 +3,15 @@
 React = require("react");
 mathjs = require("mathjs");
 
+CreateOrder = require("./OrderCreate.coffee");
+Filters = require("client/components/filters/FiltersView.coffee");
+
 css = require("./res/css/orders.css")
 
 module.exports = React.createClass
 
   getInitialState: ->
+    @filter_types = [{key: "order_date", name: "Order Date", type: "date"}];
     {};
 
   componentDidMount: ->
@@ -16,7 +20,11 @@ module.exports = React.createClass
   render: ->
 
     <div className="common-view">
-        <div style={{"textAlign": "center", "color": "white"}}>
-          <span>Orders Coming Soon!!!</span>
-        </div>
+      <div className="section-title">
+        Orders
+      </div>
+      <CreateOrder customerUpdate={@updateOrder} />
+      <Filters filterTypes={@filter_types} applyFilters={@applyFilters} />
     </div>
+
+  updateOrder: ->
