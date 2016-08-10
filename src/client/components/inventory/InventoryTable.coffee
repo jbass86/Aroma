@@ -11,27 +11,55 @@ module.exports = React.createClass
 
   getInitialState: ->
     @image_cache = new ObjectCache();
-    {expanded_rows: {}, editing_item: undefined, confirming_delete: {}};
+    {expanded_rows: {}, editing_item: undefined, confirming_delete: {}, order_mode: false};
 
   componentDidMount: ->
 
+    @props.order_model.on("change:order_mode", (model, data) =>
+      @setState({order_mode: data})
+    );
+
   render: ->
 
-    <div style={{"margin": "auto"}} className="common-table">
+    if (@state.order_mode)
 
-      {@props.items.map((item, index) =>
-        <div className="common-table-entry" key={item._id}>
+      <div style={{"margin": "auto"}} className="common-table">
 
-          <div className="row common-row" onClick={@expandRow.bind(@, item)}>
-            <div className="col-md-3">{item.name}</div>
-            <div className="col-md-3">{item.type}</div>
-            <div className="col-md-3">${item.cost}</div>
-            <div className="col-md-3">{item.status}</div>
+        {@props.items.map((item, index) =>
+          <div className="common-table-entry" key={item._id}>
+
+            <div className="row">
+              <div className="col-md-1">
+                <button className="btn btn-primary" onClick={@editItem.bind(@, item)}>
+                  <span className="glyphicon glyphicon-pushpin"></span>
+                </button>
+              </div>
+
+              <div className="col-md-11">
+                {@renderInventoryRow(item)}
+              </div>
+            </div>
+
+            {@renderInfoSection(item)}
           </div>
-          {@renderInfoSection(item)}
+        )}
+      </div>
+    else
+      <div style={{"margin": "auto"}} className="common-table">
+        {@props.items.map((item, index) =>
+          <div className="common-table-entry" key={item._id}>
+            {@renderInventoryRow(item)}
+            {@renderInfoSection(item)}
+          </div>
+        )}
+      </div>
 
-        </div>
-      )}
+  renderInventoryRow: (item) ->
+    <div className="row common-row" onClick={@expandRow.bind(@, item)}>
+      <div className="col-md-3">{item.name}</div>
+      <div className="col-md-3">{item.type}</div>
+      <div className="col-md-3">${item.cost}</div>
+      <div className="col-md-3">{item.status}</div>
     </div>
 
   renderInfoSection: (item) ->

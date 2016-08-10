@@ -26,8 +26,8 @@ module.exports = React.createClass
 
         <div className="nav-selections unselectable">
           <div className={@getNavSelectionClasses("orders")} onClick={@selectNavView.bind(@, "orders")}>Orders</div>
-          <div className={@getNavSelectionClasses("inventory")} onClick={@selectNavView.bind(@, "inventory")}>Inventory</div>
           <div className={@getNavSelectionClasses("customers")} onClick={@selectNavView.bind(@, "customers")}>Customers</div>
+          <div className={@getNavSelectionClasses("inventory")} onClick={@selectNavView.bind(@, "inventory")}>Inventory</div>
           <div className={@getNavSelectionClasses("analytics")} onClick={@selectNavView.bind(@, "analytics")}>Analytics</div>
         </div>
       </div>

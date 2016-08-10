@@ -32,6 +32,8 @@ $(() ->
   nav_model.set("authenticated", false);
   nav_model.set("remove_login", false);
 
+  order_model = new Backbone.Model();
+
   comp = React.createClass
 
     getInitialState: () ->
@@ -57,14 +59,14 @@ $(() ->
 
           <div className={"main-area" + @getMainClasses()} onClick={@closeNav}>
 
-            <NavView nav_model={nav_model} name="inventory">
-              <Inventory />
+            <NavView nav_model={nav_model} name="orders">
+              <Orders nav_model={nav_model} order_model={order_model} />
             </NavView>
             <NavView nav_model={nav_model} name="customers">
-              <Customers nav_model={nav_model} />
+              <Customers nav_model={nav_model} order_model={order_model} />
             </NavView>
-            <NavView nav_model={nav_model} name="orders">
-              <Orders nav_model={nav_model} />
+            <NavView nav_model={nav_model} name="inventory">
+              <Inventory order_model={order_model} />
             </NavView>
             <NavView nav_model={nav_model} name="analytics">
               <Analytics nav_model={nav_model} />

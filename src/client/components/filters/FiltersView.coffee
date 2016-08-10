@@ -48,10 +48,10 @@ module.exports = React.createClass
 
     if (@state.filters.length > 0)
       <fieldset className="filters-list">
-        <legend className="unselectable" onClick={@toggleShowFilters} data-toggle="collapse" data-target="#inventory-filters">
+        <legend className="unselectable" onClick={@toggleShowFilters} data-toggle="collapse" data-target={"#" + @props.name}>
           Filters <span className={legend_glyph}></span>
         </legend>
-        <div className="collapse in" id="inventory-filters">
+        <div className="collapse in" id={@props.name}>
           {@state.filters.map(@renderFilter)}
           <div>
             <button className="btn btn-primary apply-filters" onClick={@applyFilters}>Apply Filters</button>
@@ -171,5 +171,7 @@ module.exports = React.createClass
     for filter in @state.filters
       if (not filters[filter.name])
         filters[filter.name] = [];
+      if (filter.type == "text")
+        filter.value = filter.value.trim();
       filters[filter.name].push(filter);
     @props.applyFilters(filters);

@@ -28,8 +28,8 @@ module.exports = React.createClass
         Inventory
       </div>
       <CreateInventory inventoryUpdate={@updateInventory} />
-      <Filters filterTypes={@filter_types} applyFilters={@applyFilters} />
-      <InventoryTable inventoryUpdate={@updateInventory} items={@state.inventory_items} />
+      <Filters filterTypes={@filter_types} applyFilters={@applyFilters} name="inventory_filters" />
+      <InventoryTable inventoryUpdate={@updateInventory} items={@state.inventory_items} order_model={@props.order_model} />
     </div>
 
   applyFilters: (filters) ->

@@ -1,6 +1,14 @@
 /*Author: Josh Bass*/
 /*Description: Some generic style classes which can be used by any component anywhere*/
 
+.float-left{
+	float: left;
+}
+
+.float-right{
+	float: right;
+}
+
 .clear-both{
 	clear: both;
 }

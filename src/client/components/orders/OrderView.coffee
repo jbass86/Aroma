@@ -23,8 +23,8 @@ module.exports = React.createClass
       <div className="section-title">
         Orders
       </div>
-      <CreateOrder customerUpdate={@updateOrder} />
-      <Filters filterTypes={@filter_types} applyFilters={@applyFilters} />
+      <CreateOrder customerUpdate={@updateOrder} order_model={@props.order_model} />
+      <Filters filterTypes={@filter_types} applyFilters={@applyFilters} name="order_filters" />
     </div>
 
   updateOrder: ->

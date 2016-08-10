@@ -28,6 +28,7 @@ module.exports = React.createClass
     classes
 
   showCreateOrder: (ev) ->
+    @props.order_model.set("order_mode", true);
     @setState({show_create_order: true});
 
   handleClose: () ->
