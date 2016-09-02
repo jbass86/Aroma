@@ -14,7 +14,9 @@ module.exports = React.createClass
       <button type="button" className="mod-button btn btn-primary" onClick={@showCreateOrder}>Create Order</button>
       <div className="clear-both"></div>
       <div className={@getClasses()}>
-        <div>Create An order click on stuff below</div>
+        <div>
+          Create An order click on stuff below
+        </div>
       </div>
     </div>
 
