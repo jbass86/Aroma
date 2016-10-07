@@ -30,7 +30,7 @@ module.exports = React.createClass
       </div>
       <CreateCustomer customerUpdate={@updateCustomers} />
       <Filters filterTypes={@filter_types} applyFilters={@applyFilters} name="customer_filters" />
-      <CustomerTable customerUpdate={@updateCustomers} items={@state.customers} />
+      <CustomerTable customerUpdate={@updateCustomers} items={@state.customers} order_model={@props.order_model} />
     </div>
 
   applyFilters: (filters) ->

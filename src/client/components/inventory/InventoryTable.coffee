@@ -30,7 +30,7 @@ module.exports = React.createClass
 
             <div className="row">
               <div className="col-md-1">
-                <button className="btn btn-primary" onClick={@editItem.bind(@, item)}>
+                <button className="btn btn-primary" onClick={@updateOrder.bind(@, item)}>
                   <span className="glyphicon glyphicon-pushpin"></span>
                 </button>
               </div>
@@ -39,7 +39,6 @@ module.exports = React.createClass
                 {@renderInventoryRow(item)}
               </div>
             </div>
-
             {@renderInfoSection(item)}
           </div>
         )}
@@ -227,3 +226,14 @@ module.exports = React.createClass
       @image_cache.get(item.item_image_ref);
     else
       "/no_image";
+
+
+  updateOrder: (item) ->
+
+    console.log("add inventory to order");
+    console.log(item);
+    inventory_order = @props.order_model.get("inventory") || {};
+    inventory_order[item._id] = item;
+
+    @props.order_model.set("inventory", inventory_order, {silent: true});
+    @props.order_model.trigger("change:inventory", @props.order_model, inventory_order);

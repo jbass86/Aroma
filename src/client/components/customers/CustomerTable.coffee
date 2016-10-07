@@ -9,27 +9,57 @@ DateUtils = require("utilities/DateUtils.coffee");
 module.exports = React.createClass
 
   getInitialState: ->
-    {expanded_rows: {}, editing_item: undefined, confirming_delete: {}};
+    {expanded_rows: {}, editing_item: undefined, confirming_delete: {}, order_mode: false};
 
   componentDidMount: ->
 
+    @props.order_model.on("change:order_mode", (model, data) =>
+      @setState({order_mode: data})
+    );
+
   render: ->
 
-    <div style={{"margin": "auto"}} className="common-table">
+    if (@state.order_mode)
 
-      {@props.items.map((item, index) =>
-        <div className="common-table-entry" key={item._id}>
+      <div style={{"margin": "auto"}} className="common-table">
 
-          <div className="row common-row" onClick={@expandRow.bind(@, item)}>
-            <div className="col-md-3">{item.first_name}</div>
-            <div className="col-md-3">{item.last_name}</div>
-            <div className="col-md-3">{item.email}</div>
-            <div className="col-md-3">{item.social_media}</div>
+        {@props.items.map((item, index) =>
+          <div className="common-table-entry" key={item._id}>
+
+            <div className="row">
+              <div className="col-md-1">
+                <button className="btn btn-primary" onClick={@updateOrder.bind(@, item)}>
+                  <span className="glyphicon glyphicon-pushpin"></span>
+                </button>
+              </div>
+
+              <div className="col-md-11">
+                {@renderCustomerRow(item)}
+              </div>
+            </div>
+            {@renderInfoSection(item)}
           </div>
-          {@renderInfoSection(item)}
+        )}
+      </div>
 
-        </div>
-      )}
+    else
+
+      <div style={{"margin": "auto"}} className="common-table">
+
+        {@props.items.map((item, index) =>
+          <div className="common-table-entry" key={item._id}>
+            {@renderCustomerRow(item)}
+            {@renderInfoSection(item)}
+          </div>
+        )}
+      </div>
+
+  renderCustomerRow: (item) ->
+    <div className="row common-row" onClick={@expandRow.bind(@, item)}>
+      <div className="col-md-3">{item.first_name}</div>
+      <div className="col-md-3">{item.last_name}</div>
+      <div className="col-md-3">{item.email}</div>
+      <div className="col-md-3">{item.social_media}</div>
     </div>
 
   renderInfoSection: (item) ->
@@ -165,3 +195,9 @@ module.exports = React.createClass
 
   cancelEdit: () ->
     @setState({editing_item: undefined});
+
+  updateOrder: (item) ->
+
+    console.log("add customer to order");
+    console.log(item);
+    @props.order_model.set("customer", item);

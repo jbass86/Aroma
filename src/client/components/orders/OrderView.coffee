@@ -6,7 +6,7 @@ mathjs = require("mathjs");
 CreateOrder = require("./OrderCreate.coffee");
 Filters = require("client/components/filters/FiltersView.coffee");
 
-css = require("./res/css/orders.css")
+require("./res/styles/orders.scss")
 
 module.exports = React.createClass
 

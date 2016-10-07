@@ -108,18 +108,19 @@
       }
     }
 
-    .common-create-buttons{
-      width: 50%;
-      margin: auto;
-      padding-top: 5px;
-      padding-bottom: 5px;
-      text-align: center;
-    }
-
     .react-datepicker__input-container{
       width: 100%;
     }
   }
+
+  .common-create-buttons{
+    width: 50%;
+    margin: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+  }
+
 }
 
 @media only screen
