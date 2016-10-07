@@ -33,6 +33,10 @@ module.exports = class OrderCreate extends React.Component
           <span>
             Select Customer and Items for Order
           </span>
+          <div>
+            {@renderCustomerSelection()}
+            {@renderInventorySelection()}
+          </div>
           <div className="row common-create-buttons">
             <button className="col-md-6 btn button-ok">Submit Order</button>
             <button className="col-md-6 btn button-cancel">Cancel</button>
@@ -41,6 +45,32 @@ module.exports = class OrderCreate extends React.Component
 
       </div>
     </div>
+
+  renderCustomerSelection: () ->
+
+    if (@state.customer)
+      <div className="order-customer">
+        <div className="order-customer-label">Customer</div>
+        <div className="row">
+          <span className="col-md-3">
+            {@state.customer._id}
+          </span>
+          <span className="col-md-3">
+            {@state.customer.first_name}
+          </span>
+          <span className="col-md-3">
+            {@state.customer.last_name}
+          </span>
+          <span className="col-md-3">
+            {@state.customer.email}
+          </span>
+        </div>
+      </div>
+    else
+      <div></div>
+
+  renderInventorySelection: () ->
+    <div></div>
 
   getClasses: ->
 
