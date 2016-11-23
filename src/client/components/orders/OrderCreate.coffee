@@ -38,8 +38,8 @@ module.exports = class OrderCreate extends React.Component
             {@renderInventorySelection()}
           </div>
           <div className="row common-create-buttons">
-            <button className="col-md-6 btn button-ok">Submit Order</button>
-            <button className="col-md-6 btn button-cancel">Cancel</button>
+            <button className="col-md-6 btn button-ok" onClick={@submitOrder.bind(@)}>Submit Order</button>
+            <button className="col-md-6 btn button-cancel" onClick={@handleClose.bind(@)}>Cancel</button>
           </div>
         </div>
 
@@ -70,7 +70,11 @@ module.exports = class OrderCreate extends React.Component
       <div></div>
 
   renderInventorySelection: () ->
-    <div></div>
+
+    if (@state.inventory)
+      <div>We have Inentory in here!!!</div>
+    else
+      <div></div>
 
   getClasses: ->
 
@@ -86,10 +90,11 @@ module.exports = class OrderCreate extends React.Component
     @setState({show_create_order: true});
 
   handleClose: () ->
-    @setState({show_create_order: false});
-    window.setTimeout(() =>
-      @setState(@default_state);
-    , 1000);
+    @setState({show_create_order: false, customer: undefined, inventory: undefined});
 
   updateOrder: () ->
     @props.orderUpdate();
+
+  submitOrder: () ->
+    console.log("submit the order...");
+    @handleClose();

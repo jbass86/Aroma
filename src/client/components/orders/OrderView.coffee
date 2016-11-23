@@ -4,7 +4,10 @@ React = require("react");
 mathjs = require("mathjs");
 
 CreateOrder = require("./OrderCreate.coffee");
+OrderTable = require("./OrderTable.coffee");
+
 Filters = require("client/components/filters/FiltersView.coffee");
+
 
 require("./res/styles/orders.scss")
 
@@ -25,6 +28,7 @@ module.exports = React.createClass
       </div>
       <CreateOrder customerUpdate={@updateOrder} order_model={@props.order_model} />
       <Filters filterTypes={@filter_types} applyFilters={@applyFilters} name="order_filters" />
+      <OrderTable />
     </div>
 
   updateOrder: ->
